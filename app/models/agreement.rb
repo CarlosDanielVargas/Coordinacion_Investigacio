@@ -1,6 +1,6 @@
 class Agreement < ApplicationRecord
-     has_one :articles
-     has_many :transaction
+     belongs_to :article
+     has_many :transaction, dependent: :destroy
      validates :agreementNumber, presence: true, uniqueness: true
      validates :articleNumber, presence: true
 end

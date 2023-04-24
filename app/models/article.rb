@@ -1,4 +1,4 @@
 class Article < ApplicationRecord
-  belongs_to :minute
-  belongs_to :project 
+  belongs_to :project
+  has_many :agreements, dependent: :destroy
 end
