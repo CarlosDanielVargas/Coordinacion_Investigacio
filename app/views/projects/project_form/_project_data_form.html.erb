@@ -1,14 +1,22 @@
 <div class="row mb-3 text-center">
   <div class="col-2">
-    <%= form.label "Código", style: "display: block"%>
+    <%= form.label "Código previo:", style: "display: block"%>
   </div>
   <div class="col-10">
-    <%= form.text_field :code, class: "form-control"%>
+    <%= form.text_field :preAcceptanceCode, class: "form-control"%>
   </div>
 </div>
 <div class="row mb-3 text-center">
   <div class="col-2">
-    <%= form.label "Nombre", style: "display: block"%>
+    <%= form.label "Código final:", style: "display: block"%>
+  </div>
+  <div class="col-10">
+    <%= form.text_field :finalCode, class: "form-control"%>
+  </div>
+</div>
+<div class="row mb-3 text-center">
+  <div class="col-2">
+    <%= form.label "Nombre:", style: "display: block"%>
   </div>
   <div class="col-10">
     <%= form.text_field :name, class: "form-control"%>

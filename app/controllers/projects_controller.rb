@@ -78,12 +78,11 @@ class ProjectsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def create_project
-    @project = Project.new
-    @project.code = params[:project][:code]
-    @project.name = params[:project][:name]
+    @project = Project.new(project_params)
   end
 
   def add_investigators_to_project
+
     @investigators_to_add.each { |investigator| 
       if investigator == @investigators_to_add.first then 
         @project_investigator = ProjectInvestigator.create(project_id: @project.id, investigator_id: investigator.id, role: 0)
@@ -100,5 +99,9 @@ class ProjectsController < ApplicationController
     params[:project][:investigators].each { |investigator|
       if investigator[1] == "1" then @investigators_to_add << Investigator.find(investigator[0]) end
     }
+  end
+
+  def project_params
+    params.require(:project).permit(:preAcceptanceCode, :finalCode, :name)
   end
 end
