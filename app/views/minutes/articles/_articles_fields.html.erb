@@ -5,16 +5,16 @@
   </div>
   <div class="row">
     <div class="col-2">
-      <%= f.label :number, "Número de artículo", style: "display: block" %>
+      <%= f.label :code, "Número de artículo", style: "display: block" %>
     </div>
     <div class="col-2">
-      <%= f.text_field :number, class: "form-control" %>
+      <%= f.text_field :code, class: "form-control" %>
     </div>
     <div class="col-1">
       <%= f.label :project_id, "Proyecto", style: "display: block" %>
     </div>
     <div class="col-4">
-      <%= f.select :project_id, options_for_select(@projects.all.map{|project| [project.code + " - " + project.name , project.id]}), {}, class: "form-select" %>
+      <%= f.select :project_id, options_for_select(@projects.all.map{|project| [project.finalCode + " - " + project.name , project.id]}), {}, class: "form-select" %>
     </div>
     <div class="col-3">
       <div class="btn-group">
