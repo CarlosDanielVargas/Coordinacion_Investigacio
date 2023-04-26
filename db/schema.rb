@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_08_195327) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_25_235814) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,60 +40,65 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_08_195327) do
   end
 
   create_table "agreements", force: :cascade do |t|
-    t.integer "agreementNumber"
-    t.integer "articleNumber"
-    t.string "description"
+    t.string "code", null: false
+    t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "article_id", null: false
+    t.integer "articles_id"
+    t.index ["articles_id"], name: "index_agreements_on_articles_id"
   end
 
   create_table "articles", force: :cascade do |t|
-    t.string "number"
-    t.integer "minute_id"
-    t.integer "project_id"
+    t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "minute_id"
+    t.integer "project_id"
+    t.index ["minute_id"], name: "index_articles_on_minute_id"
+    t.index ["project_id"], name: "index_articles_on_project_id"
   end
 
   create_table "investigators", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "id_card"
-    t.string "email"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "id_card", null: false
+    t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "minutes", force: :cascade do |t|
-    t.integer "number"
-    t.date "date"
+    t.integer "number", null: false
+    t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "project_investigators", force: :cascade do |t|
-    t.integer "project_id", null: false
-    t.integer "investigator_id", null: false
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "project_id"
+    t.integer "investigator_id"
+    t.index ["investigator_id"], name: "index_project_investigators_on_investigator_id"
+    t.index ["project_id"], name: "index_project_investigators_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "code", null: false
+    t.string "preAcceptanceCode"
+    t.string "finalCode"
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "agreementNumber"
     t.integer "status", default: 0, null: false
-    t.string "description"
+    t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "agreement_id", null: false
+    t.integer "agreements_id"
+    t.index ["agreements_id"], name: "index_transactions_on_agreements_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -106,16 +111,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_08_195327) do
     t.string "phone", null: false
     t.string "id_card", null: false
     t.integer "role", default: 0, null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "agreements", "articles"
+  add_foreign_key "agreements", "articles", column: "articles_id"
+  add_foreign_key "articles", "minutes"
+  add_foreign_key "articles", "projects"
   add_foreign_key "project_investigators", "investigators"
-  add_foreign_key "project_investigators", "projects", on_delete: :cascade
-  add_foreign_key "transactions", "agreements"
+  add_foreign_key "project_investigators", "projects"
+  add_foreign_key "transactions", "agreements", column: "agreements_id"
 end

@@ -4,9 +4,8 @@ class Project < ApplicationRecord
   
   has_many :project_investigators
   has_many :investigators, through: :project_investigators
-
+  has_and_belongs_to_many :minute
   has_many :articles, dependent: :destroy
-  has_one :minute, dependent: :destroy
 
   accepts_nested_attributes_for :project_investigators, reject_if: ->(attributes) { attributes["name"].blank? }, allow_destroy: true
 end
