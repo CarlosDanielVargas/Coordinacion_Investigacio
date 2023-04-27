@@ -1,25 +1,25 @@
 <div class="nested-fields">
   <div class="row">
     <%= f.hidden_field :_destroy %>
-    <% f.hidden_field :minute_id, value: minute.id %>
+    <% f.hidden_field :agreement_id, value: agreement.id %>
   </div>
   <div class="row">
     <div class="col-2">
-      <%= f.label :code, "Número de artículo", style: "display: block" %>
+      <%= f.label :status, "Estado del trámite", style: "display: block" %>
     </div>
     <div class="col-2">
-      <%= f.text_field :code, class: "form-control" %>
+      <%= f.number_field :status, class: "form-control" %>
     </div>
     <div class="col-1">
-      <%= f.label :project_id, "Proyecto", style: "display: block" %>
+      <%= f.label :description, "Descripción", style: "display: block" %>
     </div>
-    <div class="col-4">
-      <%= f.select :project_id, options_for_select(@projects.all.map { |project| [project.finalCode + " - " + project.name, project.id] }), {}, class: "form-select" %>
+    <div class="col-2">
+      <%= f.text_field :description, class: "form-control" %>
     </div>
-    <div class="level2 col-3">
-      <template id="template2">
+    <div class="level4 col-3">
+      <template id="template4">
         <%= f.fields_for :agreements, Agreement.new, child_index: "TEMPLATE_RECORD" do |agreement| %>
-          <%= render "minutes/agreements/agreements_fields", f: agreement, article: f %>
+
         <% end %>
       </template>
       <div class="btn-group">

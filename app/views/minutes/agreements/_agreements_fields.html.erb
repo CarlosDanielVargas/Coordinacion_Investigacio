@@ -5,36 +5,30 @@
   </div>
   <div class="row">
     <div class="col-2">
-      <%= f.label :code, "Número de artículo", style: "display: block" %>
+      <%= f.label :code, "Número de acuerdo", style: "display: block" %>
     </div>
     <div class="col-2">
       <%= f.text_field :code, class: "form-control" %>
     </div>
     <div class="col-1">
-      <%= f.label :project_id, "Proyecto", style: "display: block" %>
+      <%= f.label :description, "Descripción", style: "display: block" %>
     </div>
-    <div class="col-3">
-      <div>
-        <template id="template3">
-          <%= f.fields_for :agreements, Agreement.new, child_index: "TEMPLATE_RECORD" do |agreement| %>
-
-          <% end %>
-        </template>
-      </div>
-      <div id="addItem3">
-        <div class="btn-group">
-          <%= link_to "#", data: { action: "click->nested-form#remove_association" }, class: "btn btn-sm btn-danger" do %>
-            <i class="bi bi-trash"></i>
-          <% end %>
-          <%= link_to "#", data: { action: "nested-form#add_association", level: "2" }, class: "btn btn-sm btn-primary" do %>
-            <i class="bi bi-plus"></i>
-            Agregar acuerdo
-          <% end %>
-        </div>
-      </div>
-      <div class="container m-3">
-        <%= f.fields_for :agreements, Agreement.new, child_index: "TEMPLATE_RECORD" do |agreement| %>
-
+    <div class="col-2">
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
+    <div class="level3 col-3">
+      <template id="template3">
+        <%= f.fields_for :transactions, Transaction.new, child_index: "TEMPLATE_RECORD" do |transaction| %>
+          <%= render "minutes/transactions/transactions_fields", f: transaction, agreement: f %>
+        <% end %>
+      </template>
+      <div class="btn-group">
+        <%= link_to "#", data: { action: "click->nested-form#remove_association" }, class: "btn btn-sm btn-danger" do %>
+          <i class="bi bi-trash"></i>
+        <% end %>
+        <%= link_to "#", data: { action: "nested-form#add_association", level: "3" }, class: "btn btn-sm btn-primary" do %>
+          <i class="bi bi-plus"></i>
+          Agregar trámite
         <% end %>
       </div>
     </div>

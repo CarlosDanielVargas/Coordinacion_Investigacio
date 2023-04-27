@@ -1,25 +1,17 @@
 <%= form_with(model: minute) do |f| %>
   <div data-controller="nested-form">
     <h4>Artículos a agregar:</h4>
-    <div>
+    <div class="level1">
       <template id="template1">
         <%= f.fields_for :articles, Article.new, child_index: "TEMPLATE_RECORD" do |article| %>
           <%= render "minutes/articles/articles_fields", f: article, minute: minute %>
         <% end %>
       </template>
-    </div>
-    <div class="container m-3">
-      <div id="addItem1">
-        <%= link_to "#", data: { action: "nested-form#add_association", level: "1" }, class: "btn btn-sm btn-primary" do %>
-          <i class="bi bi-plus"></i>
-          Agregar artículo
-        <% end %>
-      </div>
-    </div>
-    <div class="container m-3">
-      <%= f.fields_for :articles do |article| %>
-        <%= render "minutes/articles/articles_fields", f: article, minute: minute %>
+      <%= link_to "#", data: { action: "nested-form#add_association", level: "1" }, class: "btn btn-sm btn-primary" do %>
+        <i class="bi bi-plus"></i>
+        Agregar artículo
       <% end %>
+      <section class="childrenContainer row"></section>
     </div>
   </div>
   <div class="row pt-4">
