@@ -1,7 +1,7 @@
 <div class="nested-fields">
   <div class="row">
     <%= f.hidden_field :_destroy %>
-    <% f.hidden_field :minute_id, value: minute.id %>
+    <% f.hidden_field :article_id, value: article.id %>
   </div>
   <div class="row">
     <div class="col-2">
@@ -13,18 +13,15 @@
     <div class="col-1">
       <%= f.label :project_id, "Proyecto", style: "display: block" %>
     </div>
-    <div class="col-4">
-      <%= f.select :project_id, options_for_select(@projects.all.map { |project| [project.finalCode + " - " + project.name, project.id] }), {}, class: "form-select" %>
-    </div>
     <div class="col-3">
       <div>
-        <template id="template2">
+        <template id="template3">
           <%= f.fields_for :agreements, Agreement.new, child_index: "TEMPLATE_RECORD" do |agreement| %>
-            <%= render "minutes/agreements/agreements_fields", f: agreement, article: f %>
+
           <% end %>
         </template>
       </div>
-      <div id="addItem2">
+      <div id="addItem3">
         <div class="btn-group">
           <%= link_to "#", data: { action: "click->nested-form#remove_association" }, class: "btn btn-sm btn-danger" do %>
             <i class="bi bi-trash"></i>
@@ -34,6 +31,11 @@
             Agregar acuerdo
           <% end %>
         </div>
+      </div>
+      <div class="container m-3">
+        <%= f.fields_for :agreements, Agreement.new, child_index: "TEMPLATE_RECORD" do |agreement| %>
+
+        <% end %>
       </div>
     </div>
   </div>

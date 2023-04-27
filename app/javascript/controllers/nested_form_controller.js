@@ -1,16 +1,26 @@
 import {
+    add,
     Controller
 } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = ["template", "add_item"];
+    static targets = ["add_item"];
+
+    items_added = 0;
 
     add_association(event) {
+        this.items_added += 1;
+        const level = event.target.dataset.level;
+        const template = document.getElementById(`template${level}`);
+        const add_item = document.getElementById(`addItem${level}`);
+        console.log(template);
+        console.log(add_item);
+        console.log(this.items_added)
         event.preventDefault();
-        var content = '<div class="mt-3">';
-        content += this.templateTarget.innerHTML.replace(/TEMPLATE_RECORD/g, Math.floor(Math.random() * 20));
+        let content = '<div>';
+        content += template.innerHTML.replace(/TEMPLATE_RECORD/g, this.items_added.toString());
         content += '</div>';
-        this.add_itemTarget.insertAdjacentHTML('afterend', content);
+        add_item.insertAdjacentHTML('afterend', content);
     }
 
     remove_association(event) {
