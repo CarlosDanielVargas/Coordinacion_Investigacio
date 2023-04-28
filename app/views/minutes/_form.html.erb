@@ -11,21 +11,29 @@
       </div>
     <% end %>
     <div class="row pb-2">
-      <%= form.label "Número", style: "display: block"%>
+      <%= form.label "Número", style: "display: block" %>
       <%= form.number_field :number, class: "form-control" %>
     </div>
     <div class="row pb-2">
-      <%= form.label "Fecha", style: "display: block"%>
+      <%= form.label "Fecha", style: "display: block" %>
       <%= form.date_field :date, class: "form-control" %>
     </div>
     <div class="row pb-2">
-      <%= form.label "Documento de acta", style: "display: block"%>
+      <%= form.label "Documento de acta", style: "display: block" %>
       <%= form.file_field :file, class: "form-control", direct_upload: true %>
     </div>
     <br>
     <hr>
     <div class="row pb-2">
-      <%= render "minutes/articles/articles_form", minute: minute %>
+      <%= render "minutes/articles/articles_form", minute: minute, f: form %>
+    </div>
+    <div class="row pt-4">
+      <div class="col text-center">
+        <%= button_tag(:class => "btn btn-primary") do %>
+          <i class="bi bi-check-lg"></i>
+          Guardar
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>

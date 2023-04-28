@@ -22,6 +22,9 @@
           <%= render "minutes/transactions/transactions_fields", f: transaction, agreement: f %>
         <% end %>
       </template>
+      <%= f.fields_for :transactions do |transaction| %>
+        <%= render "minutes/transactions/transactions_fields", f: transaction, agreement: f %>
+      <% end %>
       <div class="btn-group">
         <%= link_to "#", data: { action: "click->nested-form#remove_association" }, class: "btn btn-sm btn-danger" do %>
           <i class="bi bi-trash"></i>
