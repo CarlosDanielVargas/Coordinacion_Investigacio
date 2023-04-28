@@ -22,12 +22,11 @@ class MinutesController < ApplicationController
 
   # POST /minutes or /minutes.json
   def create
-    byebug 
+    byebug
     @minute = Minute.new(minute_params)
-    articles = recieve_articles
     respond_to do |format|
       if @minute.save
-        articles.each { |article| Article.create(number: article[:number], minute_id: @minute.id, project_id: article[:project_id]) }
+        create_nested_entities
         format.html { redirect_to minute_url(@minute), notice: "Minute was successfully created." }
         format.json { render :show, status: :created, location: @minute }
       else
@@ -61,23 +60,39 @@ class MinutesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_minute
-      @minute = Minute.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def minute_params
-      params.require(:minute).permit(:number, :date, :file, articles: [:_destroy, :number, :minute_id, :project_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_minute
+    @minute = Minute.find(params[:id])
+  end
 
-    def set_projects
-      @projects = Project.all
-    end
+  # Only allow a list of trusted parameters through.
+  def minute_params
+    params.require(:minute).permit(:number, :date, :file, articles: [:_destroy, :number, :minute_id, :project_id])
+  end
 
-    def recieve_articles
-      if params[:minute]
-        return params[:minute][:articles_attributes].values
+  def set_projects
+    @projects = Project.all
+  end
+
+  def create_nested_entities
+    @articles = []
+    @agreements = []
+    @transactions = []
+    params[:minute][:articles_attributes].each do |article|
+      unless article[:_destroy] == "1"
+        @articles << Article.create(code: article[:code], minute_id: @minute.id, project_id: article[:project_id])
+        article[:agreements_attributes].each do |agreement|
+          unless agreement[:_destroy] == "1"
+            @agreements << Agreement.create(code: agreement[:code], description: agreement[:description], article_id: @articles.last.id)
+            agreement[:transactions_attributes].each do |transaction|
+              unless transaction[:_destroy] == "1"
+                @transactions << Transaction.create(description: transaction[:description], agreement_id: @agreements.last.id)
+              end
+            end
+          end
+        end
       end
     end
+  end
 end
