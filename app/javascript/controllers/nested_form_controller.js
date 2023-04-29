@@ -34,28 +34,14 @@ export default class extends Controller {
 
     create_id(childrenDiv, level, totalChildren) {
         if (level > 1) {
-            let parentDiv = childrenDiv.parentElement;
+            let parentDiv = childrenDiv.parentElement.parentElement.parentElement;
+            console.log(parentDiv);
             let parentId = parentDiv.id;
             let children = parentDiv.childElementCount + 1;
             return parentId + "-" + children;
         } else {
             return level + "-" + totalChildren;
         }
-    }
-
-    addChildrenDiv(children, level, totalChildren) {
-        let parentDiv = children.parentElement.parentElement;
-        console.log(parentDiv);
-        let parentId = parentDiv.id;
-        if (level === "1") {
-            parentId = 1;
-        }
-        let newChild = document.createElement('section');
-        newChild.id = `cl-${parentId}-${totalChildren}`;
-        newChild.classList.add('childrenContainer');
-        newChild.classList.add('row');
-        children.appendChild(newChild);
-        console.log(children);
     }
 
     createChildren(childrenDiv, level, totalChildren, template) {
@@ -65,9 +51,28 @@ export default class extends Controller {
         newChild.classList.add('mt-1');
         newChild.classList.add('mb-1');
         newChild.id = this.create_id(childrenDiv, level, totalChildren);
-        newChild.innerHTML = template.innerHTML.replace(/TEMPLATE_RECORD/g, newChild.id);
+        console.log(newChild.id);
+        this.changeTemplateText(newChild, level, template);
         childrenDiv.appendChild(newChild);
-        this.addChildrenDiv(newChild, level, totalChildren);
         return newChild;
+    }
+
+    changeTemplateText(newChild, level, template) {
+        switch (level) {
+            case "1":
+                newChild.innerHTML = template.innerHTML.replace(/TEMPLATE_ARTICLE/g, Math.floor(Math.random() * 1000));
+                break;
+            case "2":
+                newChild.innerHTML = template.innerHTML.replace(/TEMPLATE_AGREEMENT/g, Math.floor(Math.random() * 1000));
+                break;
+            case "3":
+                newChild.innerHTML = template.innerHTML.replace(/TEMPLATE_TRANSACTION/g, Math.floor(Math.random() * 1000));
+                break;
+            case "4":
+                newChild.innerHTML = template.innerHTML.replace(/TEMPLATE_SUBSECTION/g, Math.floor(Math.random() * 1000));
+                break;
+            default:
+                break;
+        }
     }
 }

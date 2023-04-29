@@ -7,7 +7,7 @@ class AddRelationshipsForeingKeys < ActiveRecord::Migration[7.0]
     end
 
     change_table :agreements do |t|
-      t.references :articles, foreign_key: true
+      t.references :article, foreign_key: true
     end
 
     change_table :project_investigators do |t|
@@ -16,7 +16,7 @@ class AddRelationshipsForeingKeys < ActiveRecord::Migration[7.0]
     end
 
     change_table :transactions do |t|
-      t.references :agreements, foreign_key: true
+      t.references :agreement, foreign_key: true
     end
   end
 end

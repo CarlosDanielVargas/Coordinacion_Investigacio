@@ -44,8 +44,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_235814) do
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "articles_id"
-    t.index ["articles_id"], name: "index_agreements_on_articles_id"
+    t.integer "article_id"
+    t.index ["article_id"], name: "index_agreements_on_article_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -97,8 +97,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_235814) do
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "agreements_id"
-    t.index ["agreements_id"], name: "index_transactions_on_agreements_id"
+    t.integer "agreement_id"
+    t.index ["agreement_id"], name: "index_transactions_on_agreement_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -124,10 +124,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_235814) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "agreements", "articles", column: "articles_id"
+  add_foreign_key "agreements", "articles"
   add_foreign_key "articles", "minutes"
   add_foreign_key "articles", "projects"
   add_foreign_key "project_investigators", "investigators"
   add_foreign_key "project_investigators", "projects"
-  add_foreign_key "transactions", "agreements", column: "agreements_id"
+  add_foreign_key "transactions", "agreements"
 end

@@ -18,13 +18,10 @@
     </div>
     <div class="level2 col-3">
       <template id="template2">
-        <%= f.fields_for :agreements, Agreement.new, child_index: "TEMPLATE_RECORD" do |agreement| %>
+        <%= f.fields_for :agreements, Agreement.new, child_index: "TEMPLATE_AGREEMENT" do |agreement| %>
           <%= render "minutes/agreements/agreements_fields", f: agreement, article: f %>
         <% end %>
       </template>
-      <%= f.fields_for :agreements do |agreement| %>
-        <%= render "minutes/agreements/agreements_fields", f: agreement, article: f %>
-      <% end %>
       <div class="btn-group">
         <%= link_to "#", data: { action: "click->nested-form#remove_association" }, class: "btn btn-sm btn-danger" do %>
           <i class="bi bi-trash"></i>
@@ -35,5 +32,6 @@
         <% end %>
       </div>
     </div>
+    <section class="childrenContainer row"></section>
   </div>
 </div>
