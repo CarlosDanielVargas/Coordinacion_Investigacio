@@ -11,6 +11,10 @@ class Investigator < ApplicationRecord
   has_many :projects, through: :project_investigators
 
   def to_s
-    "#{id_card}- #{first_name} #{last_name}"
+    "#{first_name} #{last_name} (#{id_card})"
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end
