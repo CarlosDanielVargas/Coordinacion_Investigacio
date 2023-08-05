@@ -81,3 +81,7 @@ gem "byebug", "~> 11.1"
 gem "ransack", "~> 3.2"
 
 gem "rspec", "~> 3.11"
+
+gem 'jquery-rails'
+
+gem 'cocoon'
