@@ -1,0 +1,16 @@
+<div class="nested-fields">
+  <div class="row mt-4 ms-2">
+    <div class="col-2">
+      <%= f.label :status, "Estado del trámite", style: "display: block" %>
+    </div>
+    <div class="col-2">
+      <%= f.number_field :status, class: "form-control" %>
+    </div>
+    <div class="col-1">
+      <%= f.label :description, "Descripción", style: "display: block" %>
+    </div>
+    <div class="col-2">
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="nested-fields">
+  <div class="row mt-4">
+    <div class="col-2">
+      <%= f.label :code, "Número de artículo", style: "display: block" %>
+    </div>
+    <div class="col-2">
+      <%= f.text_field :code, class: "form-control" %>
+    </div>
+    <div class="col-1">
+      <%= f.label :project_id, "Proyecto", style: "display: block" %>
+    </div>
+    <div class="col-3">
+      <%= f.select :project_id, options_for_select(@projects.all.map { |project| [project.finalCode + " - " + project.name, project.id] }), {}, class: "form-select" %>
+    </div>
+    <div class="col-3 btn-group">
+      <%= link_to_remove_association f, class: "btn btn-danger" do %>
+        <i class="bi bi-trash-fill"></i>
+      <% end %>
+      <%= link_to_add_association f, :agreements, class: "btn btn-success", data: { association_insertion_node: "#agreements_#{f.object.object_id}", association_insertion_method: :append } do %>
+        <i class="bi bi-plus-circle-fill"></i> Agregar acuerdo
+      <% end %>
+    </div>
+    <div class="row pb-2">
+      <div id="agreements_<%= f.object.object_id %>" class="agreements">
+        <%= f.fields_for :agreements do |agreement| %>
+          <%= render "agreement_fields", f: agreement, minute: minute %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
