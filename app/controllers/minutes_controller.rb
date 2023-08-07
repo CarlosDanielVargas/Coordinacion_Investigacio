@@ -14,13 +14,6 @@ class MinutesController < ApplicationController
   # GET /minutes/new
   def new
     @minute = Minute.new
-    @minute.articles.build
-    @minute.articles.each { |article|
-      article.agreements.build
-      article.agreements.each { |agreement|
-        agreement.transactions.build
-      }
-    }
   end
 
   # GET /minutes/1/edit
@@ -29,19 +22,19 @@ class MinutesController < ApplicationController
 
   # POST /minutes or /minutes.json
   def create
-    byebug
     @minute = Minute.new(minute_params)
     respond_to do |format|
       if @minute.save
-        create_nested_entities
-        format.html { redirect_to minute_url(@minute), notice: "Minute was successfully created." }
+        format.html { redirect_to minute_url(@minute), notice: 'Minute was successfully created.' }
         format.json { render :show, status: :created, location: @minute }
       else
+        set_projects
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @minute.errors, status: :unprocessable_entity }
       end
     end
   end
+
 
   # PATCH/PUT /minutes/1 or /minutes/1.json
   def update
@@ -76,40 +69,12 @@ class MinutesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def minute_params
     params.require(:minute).permit(:number, :date, :file,
-                                   articles: [:_destroy, :number, :minute_id, :project_id,
-                                              agreements: [:_destroy, :number, :article_id,
-                                                           transactions: [:_destroy, :number, :agreement_id]]])
+                                   articles_attributes: [:id, :_destroy, :code, :minute_id, :project_id,
+                                                         agreements_attributes: [:id, :_destroy, :code, :article_id, :description,
+                                                                                 transactions_attributes: [:id, :_destroy, :description, :status, :agreement_id]]])
   end
 
   def set_projects
     @projects = Project.all
-  end
-
-  def create_nested_entities
-    byebug
-    @articles = []
-    @agreements = []
-    @transactions = []
-    params[:minute][:articles_attributes].each do |article|
-      article = article[1]
-      byebug
-      unless article[:_destroy] == "1"
-        @articles << Article.create(code: article[:code], minute_id: @minute.id, project_id: article[:project_id])
-        article[:agreements_attributes].each do |agreement|
-          agreement = agreement[1]
-          byebug
-          unless agreement[:_destroy] == "1"
-            @agreements << Agreement.create(code: agreement[:code], description: agreement[:description], article_id: @articles.last.id)
-            agreement[:transactions_attributes].each do |transaction|
-              transaction = transaction[1]
-              byebug
-              unless transaction[:_destroy] == "1"
-                @transactions << Transaction.create(description: transaction[:description], agreement_id: @agreements.last.id)
-              end
-            end
-          end
-        end
-      end
-    end
   end
 end

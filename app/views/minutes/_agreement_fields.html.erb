@@ -1,4 +1,4 @@
-<div class="nested-fields">
+<div class="nested-fields agreement-fields">
   <div class="row mt-4 ms-1">
     <div class="col-2">
       <%= f.label :code, "Número de acuerdo", style: "display: block" %>
@@ -16,7 +16,7 @@
       <%= link_to_remove_association f, class: "btn btn-danger" do %>
         <i class="bi bi-trash-fill"></i>
       <% end %>
-      <%= link_to_add_association f, :transactions, class: "btn btn-success", data: { association_insertion_node: "#transactions_#{f.object.object_id}", association_insertion_method: :append } do %>
+      <%= link_to_add_association f, :transactions, class: "btn btn-success add-transaction", data: { association_insertion_node: ".transactions", association_insertion_method: :append } do %>
         <i class="bi bi-plus-circle-fill"></i> Agregar transacción
       <% end %>
     </div>
@@ -29,3 +29,35 @@
     </div>
   </div>
 </div>
+<script>
+    $(document).on('cocoon:before-insert', function (e, insertedItem, originalEvent) {
+        var htmlString = originalEvent.target.outerHTML
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(htmlString, 'text/html');
+        var element = doc.querySelector('a');
+        var classes = Array.from(element.classList);
+        if (classes.includes("add-transaction")) {
+            e.preventDefault()
+            var buttonClicked = originalEvent.target
+            var parentAgreement = $(buttonClicked).closest('.agreement-fields')
+            var transactions = parentAgreement.find('.transaction-fields')
+            var totalTransactions = transactions.length
+            if (totalTransactions === 0) {
+                insertedItem.attr("id", parentAgreement.attr('id') + "transaction_1")
+            } else {
+                var lastAgreement = transactions[totalTransactions - 1]
+                var lastAgreementId = lastAgreement.id
+                var lastAgreementNumber = lastAgreementId.split("_")[3]
+                var newAgreementNumber = parseInt(lastAgreementNumber) + 1
+                insertedItem.attr("id", parentAgreement.attr('id') + "transaction_" + newAgreementNumber)
+            }
+
+            // Set the data attributes for association insertion
+            insertedItem.find("a.add_fields")
+                .data("association-insertion-method", 'append')
+                .data("association-insertion-node", '#' + parentAgreement.attr('id'));
+
+            parentAgreement.append(insertedItem)
+        }
+    });
+</script>
