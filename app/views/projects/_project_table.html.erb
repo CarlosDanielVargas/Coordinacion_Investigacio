@@ -12,7 +12,7 @@
   <% @projects.each do |project| %>
     <tr>
       <td><%= project.preAcceptanceCode %></td>
-      <td><%= project.finalCode %></td>
+      <td><%= project.finalCode == "" ? "--" : project.finalCode %></td>
       <td><%= project.name %></td>
       <td><%= project.get_main_investigator %></td>
       <td>
@@ -25,3 +25,5 @@
   <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @projects %>

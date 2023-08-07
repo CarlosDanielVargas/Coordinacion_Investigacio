@@ -4,6 +4,14 @@
       <h1 class="text-center">Proyectos</h1>
     </div>
   </div>
+
+  <div class="mt-4 mb-4">
+    <div id="filter-form">
+      <%= render 'filter_form' %>
+    </div>
+  </div>
+
+
   <div class="row mt-4 mb-4">
     <div id="investigators">
       <%= render 'project_table', projects: @projects %>

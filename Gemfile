@@ -81,3 +81,6 @@ gem "byebug", "~> 11.1"
 gem "ransack", "~> 3.2"
 
 gem "rspec", "~> 3.11"
+
+#Will paginate
+gem "will_paginate", "~> 4.0"
