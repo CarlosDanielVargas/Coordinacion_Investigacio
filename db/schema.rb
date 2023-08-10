@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_25_235814) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_10_180359) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,6 +74,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_235814) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notices", force: :cascade do |t|
+    t.string "code"
+    t.integer "transaction_record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["transaction_record_id"], name: "index_notices_on_transaction_record_id"
+  end
+
   create_table "project_investigators", force: :cascade do |t|
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
@@ -92,13 +100,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_235814) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "transaction_records", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "agreement_id"
-    t.index ["agreement_id"], name: "index_transactions_on_agreement_id"
+    t.index ["agreement_id"], name: "index_transaction_records_on_agreement_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -127,7 +135,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_235814) do
   add_foreign_key "agreements", "articles"
   add_foreign_key "articles", "minutes"
   add_foreign_key "articles", "projects"
+  add_foreign_key "notices", "transaction_records"
   add_foreign_key "project_investigators", "investigators"
   add_foreign_key "project_investigators", "projects"
-  add_foreign_key "transactions", "agreements"
+  add_foreign_key "transaction_records", "agreements"
 end

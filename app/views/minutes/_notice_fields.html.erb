@@ -1,0 +1,21 @@
+<div class="nested-fields notice-fields">
+  <div class="row mt-4 ms-4">
+    <div class="col-2">
+      <%= f.label :code, "Número de oficio", style: "display: block" %>
+    </div>
+    <div class="col-2">
+      <%= f.text_field :code, class: "form-control" %>
+    </div>
+    <div class="col-2">
+      <%= f.label "Documento del oficio", style: "display: block" %>
+    </div>
+    <div class="col-5">
+      <%= f.file_field :file, class: "form-control", direct_upload: true %>
+    </div>
+    <div class="col-1">
+      <%= link_to_remove_association f, class: "btn btn-danger" do %>
+        <i class="bi bi-trash-fill"></i>
+      <% end %>
+    </div>
+  </div>
+</div>

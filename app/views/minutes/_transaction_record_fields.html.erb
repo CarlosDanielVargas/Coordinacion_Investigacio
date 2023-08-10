@@ -1,0 +1,63 @@
+<div class="nested-fields transaction-fields">
+  <div class="row mt-4 ms-2">
+    <div class="col-2">
+      <%= f.label :status, "Estado del trámite", style: "display: block" %>
+    </div>
+    <div class="col-2">
+      <%= f.select :status, TransactionRecord.statuses.keys.map { |key| [key.capitalize, key] }, class: "form-control" %>
+    </div>
+    <div class="col-1">
+      <%= f.label :description, "Descripción", style: "display: block" %>
+    </div>
+    <div class="col-2">
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
+    <div class="col-3 btn-group">
+      <%= link_to_remove_association f, class: "btn btn-danger" do %>
+        <i class="bi bi-trash-fill"></i>
+      <% end %>
+      <%= link_to_add_association f, :notices, class: "btn btn-success add-notice", data: { association_insertion_node: ".notices", association_insertion_method: :append } do %>
+        <i class="bi bi-plus-circle-fill"></i> Agregar oficio
+      <% end %>
+    </div>
+  </div>
+  <div class="row pb-2">
+    <div id="notices_<%= f.object.object_id %>" class="notice">
+      <%= f.fields_for :notices do |notice| %>
+        <%= render "notice_fields", f: notice, minute: minute, transaction_record: f %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+    $(document).on('cocoon:before-insert', function (e, insertedItem, originalEvent) {
+        var htmlString = originalEvent.target.outerHTML
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(htmlString, 'text/html');
+        var element = doc.querySelector('a');
+        var classes = Array.from(element.classList);
+        if (classes.includes("add-notice")) {
+            e.preventDefault()
+            var buttonClicked = originalEvent.target
+            var parentTransaction = $(buttonClicked).closest('.transaction-fields')
+            var notices = parentTransaction.find('.notice-fields')
+            var totalNotices = notices.length
+            if (totalNotices === 0) {
+                insertedItem.attr("id", parentTransaction.attr('id') + "notice_1")
+            } else {
+                var lastNotice = notices[totalNotices - 1]
+                var lastNoticeId = lastNotice.id
+                var lastNoticeNumber = lastNoticeId.split("_")[4]
+                var newNoticeNumber = parseInt(lastNoticeNumber) + 1
+                insertedItem.attr("id", parentTransaction.attr('id') + "notice_" + newNoticeNumber)
+            }
+
+            // Set the data attributes for association insertion
+            insertedItem.find("a.add_fields")
+                .data("association-insertion-method", 'append')
+                .data("association-insertion-node", '#' + parentTransaction.attr('id'));
+
+            parentTransaction.append(insertedItem)
+        }
+    });
+</script>

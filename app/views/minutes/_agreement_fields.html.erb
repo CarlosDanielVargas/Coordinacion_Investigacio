@@ -16,14 +16,14 @@
       <%= link_to_remove_association f, class: "btn btn-danger" do %>
         <i class="bi bi-trash-fill"></i>
       <% end %>
-      <%= link_to_add_association f, :transactions, class: "btn btn-success add-transaction", data: { association_insertion_node: ".transactions", association_insertion_method: :append } do %>
+      <%= link_to_add_association f, :transaction_records, class: "btn btn-success add-transaction", data: { association_insertion_node: ".transactions", association_insertion_method: :append } do %>
         <i class="bi bi-plus-circle-fill"></i> Agregar transacción
       <% end %>
     </div>
     <div class="row pb-2">
       <div id="transactions_<%= f.object.object_id %>" class="transactions">
-        <%= f.fields_for :transactions do |transaction| %>
-          <%= render "transaction_fields", f: transaction, minute: minute %>
+        <%= f.fields_for :transaction_records do |transaction| %>
+          <%= render "transaction_record_fields", f: transaction, minute: minute %>
         <% end %>
       </div>
     </div>

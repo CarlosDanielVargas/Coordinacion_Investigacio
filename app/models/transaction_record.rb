@@ -1,5 +1,7 @@
-class Transaction < ApplicationRecord
+class TransactionRecord < ApplicationRecord
     belongs_to :agreement
+    has_many :notices, dependent: :destroy
+    accepts_nested_attributes_for :notices, allow_destroy: true, reject_if: proc { |attr| attr["code"].blank? }
     enum status: [:Pendiente, :Finalizado, :En_Ejecución]
     validates :status, presence: true
     

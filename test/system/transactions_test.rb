@@ -16,28 +16,28 @@ class TransactionsTest < ApplicationSystemTestCase
 
     fill_in "Agreementnumber", with: @transaction.agreementNumber
     fill_in "Status", with: @transaction.status
-    click_on "Create Transaction"
+    click_on "Create Process"
 
-    assert_text "Transaction was successfully created"
+    assert_text "Process was successfully created"
     click_on "Back"
   end
 
-  test "should update Transaction" do
+  test "should update Process" do
     visit transaction_url(@transaction)
     click_on "Edit this transaction", match: :first
 
     fill_in "Agreementnumber", with: @transaction.agreementNumber
     fill_in "Status", with: @transaction.status
-    click_on "Update Transaction"
+    click_on "Update Process"
 
-    assert_text "Transaction was successfully updated"
+    assert_text "Process was successfully updated"
     click_on "Back"
   end
 
-  test "should destroy Transaction" do
+  test "should destroy Process" do
     visit transaction_url(@transaction)
     click_on "Destroy this transaction", match: :first
 
-    assert_text "Transaction was successfully destroyed"
+    assert_text "Process was successfully destroyed"
   end
 end

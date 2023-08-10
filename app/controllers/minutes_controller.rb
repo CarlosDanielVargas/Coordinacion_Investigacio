@@ -71,7 +71,8 @@ class MinutesController < ApplicationController
     params.require(:minute).permit(:number, :date, :file,
                                    articles_attributes: [:id, :_destroy, :code, :minute_id, :project_id,
                                                          agreements_attributes: [:id, :_destroy, :code, :article_id, :description,
-                                                                                 transactions_attributes: [:id, :_destroy, :description, :status, :agreement_id]]])
+                                                                                 transaction_records_attributes: [:id, :_destroy, :description, :status, :agreement_id,
+                                                                                                           notices_attributes: [:id, :_destroy, :code, :transaction_record_id, :file]]]])
   end
 
   def set_projects
