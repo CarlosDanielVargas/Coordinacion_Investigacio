@@ -9,8 +9,13 @@
     <div class="col-2">
       <%= f.label "Documento del oficio", style: "display: block" %>
     </div>
-    <div class="col-5">
+    <div class="col-3">
       <%= f.file_field :file, class: "form-control", direct_upload: true %>
+    </div>
+    <div class="col-2">
+      <% if f.object.file.attached? %>
+        <p>Documento existente: <%= link_to f.object.file.filename, url_for(f.object.file) %></p>
+      <% end %>
     </div>
     <div class="col-1">
       <%= link_to_remove_association f, class: "btn btn-danger" do %>
