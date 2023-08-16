@@ -1,0 +1,25 @@
+<%= search_form_for @q do |f| %>
+    <div class="field">
+        <%= f.label :name_cont, "Nombre" %>
+        <%= f.text_field :name_cont, class: "form-control" %>
+    </div>
+
+    <div class="field">
+        <%= f.label :preAcceptanceCode_cont, "Código previo" %>
+        <%= f.text_field :preAcceptanceCode_cont, class: "form-control" %>
+    </div>
+
+    <div class="field">
+        <%= f.label :finalCode_cont, "Código final" %>
+        <%= f.text_field :finalCode_cont, class: "form-control" %>
+    </div>
+
+    <div class="field">
+        <%= f.label :project_investigators_id_eq, "Investigador" %>
+        <%= f.collection_select :project_investigators_id_eq, Investigator.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select" } %>
+    </div>
+
+    <div class="action mt-3 text-end">
+        <%= f.submit "Buscar", class: "btn btn-secondary" %>
+    </div>
+<% end %>
