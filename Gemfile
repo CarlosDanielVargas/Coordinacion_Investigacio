@@ -88,3 +88,5 @@ gem "cocoon"
 
 #Will paginate
 gem "will_paginate", "~> 4.0"
+
+gem "i18n_generators", "~> 2.2"

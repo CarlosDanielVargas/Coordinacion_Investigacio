@@ -1,0 +1,110 @@
+es:
+  activerecord:
+    models:
+      active_storage/attachment: Almacenamiento activo/adjunto  #g
+      active_storage/blob: Blob/almacenamiento activo  #g
+      active_storage/variant_record: Almacenamiento activo/registro de variante  #g
+      agreement: Acuerdo  #g
+      article: Artículo  #g
+      investigator: Investigador  #g
+      minute: Minuto  #g
+      notice: Aviso  #g
+      project: Proyecto  #g
+      project_investigator: investigador del proyecto  #g
+      transaction_record: Registro de la transacción  #g
+      user: Usuario  #g
+
+    attributes:
+      active_storage/attachment:
+        blob: :activerecord.models.blob  #g
+        name: Nombre  #g
+        record: :activerecord.models.record  #g
+        record_type: tipo de registro  #g
+
+      active_storage/blob:
+        attachments: Archivos adjuntos  #g
+        byte_size: Tamaño de bytes  #g
+        checksum: Suma de verificación  #g
+        content_type: Tipo de contenido  #g
+        filename: Nombre del archivo  #g
+        key: Llave  #g
+        metadata: Metadatos  #g
+        preview_image_attachment: :activerecord.models.preview_image_attachment  #g
+        preview_image_blob: :activerecord.models.preview_image_blob  #g
+        service_name: Nombre del Servicio  #g
+        variant_records: Registros de variantes  #g
+
+      active_storage/variant_record:
+        blob: :activerecord.models.blob  #g
+        image_attachment: :activerecord.models.image_attachment  #g
+        image_blob: :activerecord.models.image_blob  #g
+        variation_digest: Resumen de variación  #g
+
+      agreement:
+        article: :activerecord.models.article  #g
+        code: Código  #g
+        description: Descripción  #g
+        transaction_records: Registros de transacciones  #g
+
+      article:
+        agreements: Acuerdos  #g
+        code: Código  #g
+        minute: :activerecord.models.minute  #g
+        project: :activerecord.models.project  #g
+
+      investigator:
+        email: Correo electrónico  #g
+        first_name: Nombre de pila  #g
+        id_card: Tarjeta de identificación  #g
+        last_name: Apellido  #g
+        project_investigators: Investigadores del proyecto  #g
+        projects: Proyectos  #g
+
+      minute:
+        articles: Artículos  #g
+        date: Fecha  #g
+        file_attachment: :activerecord.models.file_attachment  #g
+        file_blob: :activerecord.models.file_blob  #g
+        number: Número  #g
+        projects: Proyectos  #g
+
+      notice:
+        code: Código  #g
+        file_attachment: :activerecord.models.file_attachment  #g
+        file_blob: :activerecord.models.file_blob  #g
+        transaction_record: :activerecord.models.transaction_record  #g
+
+      project:
+        articles: Artículos  #g
+        finalCode: código final  #g
+        investigators: investigadores  #g
+        minutes: Minutos  #g
+        name: Nombre  #g
+        preAcceptanceCode: código de preaceptación  #g
+        project_investigators: Investigadores del proyecto  #g
+
+      project_investigator:
+        investigator: :activerecord.models.investigator  #g
+        project: :activerecord.models.project  #g
+        role: Role  #g
+
+      transaction_record:
+        agreement: :activerecord.models.agreement  #g
+        description: Descripción  #g
+        notices: Avisos  #g
+        status: Estado  #g
+
+      user:
+        confirmation_sent_at: Confirmación enviada a  #g
+        confirmation_token: ficha de confirmación  #g
+        confirmed_at: Confirmado en  #g
+        email: Correo electrónico  #g
+        encrypted_password: Contraseña encriptada  #g
+        id_card: Tarjeta de identificación  #g
+        name: Nombre  #g
+        phone: Teléfono  #g
+        remember_created_at: Recordar creado en  #g
+        reset_password_sent_at: Restablecer contraseña enviada a  #g
+        reset_password_token: Restablecer token de contraseña  #g
+        role: Role  #g
+        unconfirmed_email: Correo electrónico no confirmado  #g

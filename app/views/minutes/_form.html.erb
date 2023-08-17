@@ -22,7 +22,7 @@
       <%= f.label "Documento de acta", style: "display: block" %>
       <%= f.file_field :file, class: "form-control", direct_upload: true %>
       <% if minute.file.attached? %>
-        <p>Documento existente: <%= link_to minute.file.filename, url_for(minute.file) %></p>
+        <p>Documento existente: <%= link_to minute.file.filename, url_for(minute.file), target: "_blank" %></p>
       <% end %>
     </div>
     <div>
