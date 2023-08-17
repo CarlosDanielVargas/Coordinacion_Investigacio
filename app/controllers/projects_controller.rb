@@ -4,8 +4,23 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.all
-  end
+    @q = Project.ransack(params[:q])
+  
+    if params[:q].nil?
+      @projects = Project.all.paginate(page: params[:page], per_page: 7)
+      return
+    end
+  
+    q_investigator = params[:q][:project_investigators_id_eq]
+    if q_investigator.present?
+      investigator_projects = Project.joins(:project_investigators).where(project_investigators: { investigator_id: q_investigator })
+      @projects = investigator_projects
+    else
+      @projects = @q.result(distinct: true)
+    end
+  
+    @projects = @projects.distinct.paginate(page: params[:page], per_page: 7)
+  end   
 
   # GET /projects/1 or /projects/1.json
   def show
@@ -27,9 +42,9 @@ class ProjectsController < ApplicationController
 
   # POST /projects or /projects.json
   def create
-    byebug
+    @project = Project.new(project_params)
     get_investigators_passed_in_params
-    create_project
+
     respond_to do |format|
       if @project.save
         add_investigators_to_project
@@ -46,7 +61,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to project_url(@project), notice: "Project was successfully updated." }
+        format.html { redirect_to projects_url, notice: "Project was successfully updated." }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -74,15 +89,10 @@ class ProjectsController < ApplicationController
 
   def set_investigators
     @investigators = Investigator.all
-  end
-
-  # Only allow a list of trusted parameters through.
-  def create_project
-    @project = Project.new(project_params)
+    @selected_investigator_id = @project.principal_investigator.id unless @project.nil?
   end
 
   def add_investigators_to_project
-
     @investigators_to_add.each { |investigator| 
       if investigator == @investigators_to_add.first then 
         @project_investigator = ProjectInvestigator.create(project_id: @project.id, investigator_id: investigator.id, role: 0)
@@ -93,9 +103,13 @@ class ProjectsController < ApplicationController
 
   def get_investigators_passed_in_params
     @investigators_to_add = Array.new
-    principal_investigator_id_card = params[:project][:principal_investigator].split("-")[0]
+
+    # Investigador principal
+    principal_investigator_id_card = params[:project][:principal_investigator].split(" (")[1].split(")")[0]
     principal_investigator = Investigator.find_by(id_card: principal_investigator_id_card)
     @investigators_to_add << principal_investigator
+
+    # Investigadores asociados
     params[:project][:investigators].each { |investigator|
       if investigator[1] == "1" then @investigators_to_add << Investigator.find(investigator[0]) end
     }

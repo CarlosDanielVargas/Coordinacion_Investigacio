@@ -82,6 +82,5 @@ gem "ransack", "~> 3.2"
 
 gem "rspec", "~> 3.11"
 
-gem 'jquery-rails'
-
-gem 'cocoon'
+#Will paginate
+gem "will_paginate", "~> 4.0"

@@ -4,27 +4,26 @@
     <th>Código previo</th>
     <th>Código final</th>
     <th>Nombre</th>
-    <th>Investigador</th>
-    <th>Rol</th>
+    <th>Investigador Principal</th>
+    <th>Acciones</th>
   </tr>
   </thead>
   <tbody>
   <% @projects.each do |project| %>
-    <% project.investigators.each do |investigator| %>
-      <tr>
-        <td><%= project.preAcceptanceCode %></td>
-        <td><%= project.finalCode %></td>
-        <td><%= project.name %></td>
-        <td><%= investigator %></td>
-        <td>
-          <% if project.project_investigators.find_by(investigator: investigator).role == 0 %>
-            Investigador principal
-          <% else %>
-            Investigador secundario
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
+    <tr>
+      <td><%= project.preAcceptanceCode %></td>
+      <td><%= project.finalCode == "" ? "--" : project.finalCode %></td>
+      <td><%= project.name %></td>
+      <td><%= project.principal_investigator %></td>
+      <td>
+        <div class="btn-group gap-2">
+          <%= link_to "Ver detalles", edit_project_path(project), class: "btn btn-sm btn-outline-primary" %>
+          <%= link_to "Eliminar", project, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Estás seguro?' }, class: 'btn btn-sm btn-outline-danger' %>
+        </div>
+      </td>
+    </tr>
   <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @projects %>
