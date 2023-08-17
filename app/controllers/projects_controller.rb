@@ -104,11 +104,13 @@ class ProjectsController < ApplicationController
   def get_investigators_passed_in_params
     @investigators_to_add = Array.new
 
+    if params[:project][:principal_investigator].nil? then return end
     # Investigador principal
     principal_investigator_id_card = params[:project][:principal_investigator].split(" (")[1].split(")")[0]
     principal_investigator = Investigator.find_by(id_card: principal_investigator_id_card)
     @investigators_to_add << principal_investigator
 
+    if params[:project][:investigators].nil? then return end
     # Investigadores asociados
     params[:project][:investigators].each { |investigator|
       if investigator[1] == "1" then @investigators_to_add << Investigator.find(investigator[0]) end

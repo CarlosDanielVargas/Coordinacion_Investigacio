@@ -4,7 +4,14 @@ class MinutesController < ApplicationController
 
   # GET /minutes or /minutes.json
   def index
-    @minutes = Minute.all
+    @q = Minute.ransack(params[:q])
+
+    if params[:q].nil?
+      @minutes = Minute.all.paginate(page: params[:page], per_page: 7)
+      return
+    end
+
+    q_project_
   end
 
   # GET /minutes/1 or /minutes/1.json
