@@ -6,11 +6,15 @@ export default class extends Controller {
     static classes = ["hidden"];
 
     connect() {
-        var option = document.createElement("option");
-        option.text = "Seleccione una opción";
-        option.selected = true;
-        option.disabled = true;
-        this.selectTarget.add(option);
+        if (this.element.dataset.action === 'edit') {
+            this.select();
+        } else {
+            var option = document.createElement("option");
+            option.text = "Seleccione una opción";
+            option.selected = true;
+            option.disabled = true;
+            this.selectTarget.add(option);
+        }
     }
 
     select() {

@@ -61,7 +61,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to project_url(@project), notice: "Project was successfully updated." }
+        format.html { redirect_to projects_url, notice: "Project was successfully updated." }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -89,6 +89,7 @@ class ProjectsController < ApplicationController
 
   def set_investigators
     @investigators = Investigator.all
+    @selected_investigator_id = @project.principal_investigator.id unless @project.nil?
   end
 
   def add_investigators_to_project

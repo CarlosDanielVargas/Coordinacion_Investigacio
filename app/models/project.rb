@@ -20,7 +20,7 @@ class Project < ApplicationRecord
     ["project_investigators"]
   end
 
-  def get_main_investigator
+  def principal_investigator
     return "--" if self.project_investigators.empty?
     inv = self.project_investigators.find_by(role: "principal")
     inv = Investigator.find_by(id: inv.investigator_id)
