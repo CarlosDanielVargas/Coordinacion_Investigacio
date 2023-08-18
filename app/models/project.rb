@@ -26,4 +26,8 @@ class Project < ApplicationRecord
     inv = self.project_investigators.find_by(role: "principal")
     inv = Investigator.find_by(id: inv.investigator_id)
   end
+
+  def to_s
+    "#{self.finalCode}  -  #{self.name}"
+  end
 end

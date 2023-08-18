@@ -1,7 +1,17 @@
 <div class="container">
   <p style="color: green"><%= notice %></p>
 
-  <h1>Actas</h1>
+  <div class="row mt-4 mb-4">
+    <div class="col-md-12">
+      <h1 class="text-center">Actas</h1>
+    </div>
+  </div>
+
+  <div class="mt-4 mb-4">
+    <div id="filter-form">
+      <%= render 'minute_filters' %>
+    </div>
+  </div>
 
   <div id="minutes">
     <table class="table table-hover text-center">

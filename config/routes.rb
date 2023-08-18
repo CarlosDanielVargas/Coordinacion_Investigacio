@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :minutes
+  resources :minutes do
+    collection do
+      match 'search' => 'minutes#search', via: [:get, :post], as: :search
+    end
+  end
   resources :projects
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

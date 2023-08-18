@@ -5,13 +5,29 @@ class MinutesController < ApplicationController
   # GET /minutes or /minutes.json
   def index
     @q = Minute.ransack(params[:q])
+    @minutes = @q.result(distinct: true).includes(:projects, :investigators)
 
     if params[:q].nil?
       @minutes = Minute.all.paginate(page: params[:page], per_page: 7)
       return
     end
 
-    q_project_
+    q_project = params[:q][:project_id_eq]
+    if q_project.present?
+      @minutes = @minutes.where(projects: { id: q_project })
+    end
+
+    q_investigator = params[:q][:investigator_id_eq]
+    if q_investigator.present?
+      @minutes = @minutes.where(investigators: { id: q_investigator })
+    end
+
+    @minutes = @minutes.distinct.paginate(page: params[:page], per_page: 7)
+  end
+
+  def search
+    index
+    render :index
   end
 
   # GET /minutes/1 or /minutes/1.json
@@ -41,7 +57,6 @@ class MinutesController < ApplicationController
       end
     end
   end
-
 
   # PATCH/PUT /minutes/1 or /minutes/1.json
   def update
@@ -79,7 +94,7 @@ class MinutesController < ApplicationController
                                    articles_attributes: [:id, :_destroy, :code, :minute_id, :project_id,
                                                          agreements_attributes: [:id, :_destroy, :code, :article_id, :description,
                                                                                  transaction_records_attributes: [:id, :_destroy, :description, :status, :agreement_id,
-                                                                                                           notices_attributes: [:id, :_destroy, :code, :transaction_record_id, :file]]]])
+                                                                                                                  notices_attributes: [:id, :_destroy, :code, :transaction_record_id, :file]]]])
   end
 
   def set_projects
