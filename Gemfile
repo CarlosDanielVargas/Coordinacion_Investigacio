@@ -87,6 +87,8 @@ gem 'jquery-rails'
 gem "cocoon"
 
 #Will paginate
-gem "will_paginate", "~> 4.0"
+gem "will_paginate"
 
-gem "i18n_generators", "~> 2.2"
+gem "i18n_generators"
+
+gem 'devise-i18n'

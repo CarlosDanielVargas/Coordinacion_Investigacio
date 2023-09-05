@@ -15,8 +15,12 @@
       <%= f.number_field :number, class: "form-control" %>
     </div>
     <div class="row pb-2">
-      <%= f.label "Fecha", style: "display: block" %>
-      <%= f.date_field :date, class: "form-control" %>
+      <%= f.label "Fecha de la reunión:", style: "display: block" %>
+      <%= f.date_field :creation_date, class: "form-control" %>
+    </div>
+    <div class="row pb-2">
+      <%= f.label "Fecha de la aceptación:", style: "display: block" %>
+      <%= f.date_field :acceptation_date, class: "form-control" %>
     </div>
     <div class="row pb-2">
       <%= f.label "Documento de acta", style: "display: block" %>

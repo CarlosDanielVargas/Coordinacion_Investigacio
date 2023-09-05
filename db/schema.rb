@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_10_180359) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_04_231850) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_180359) do
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "article_id"
+    t.integer "article_id", null: false
     t.index ["article_id"], name: "index_agreements_on_article_id"
   end
 
@@ -52,8 +52,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_180359) do
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "minute_id"
-    t.integer "project_id"
+    t.integer "minute_id", null: false
+    t.integer "project_id", null: false
     t.index ["minute_id"], name: "index_articles_on_minute_id"
     t.index ["project_id"], name: "index_articles_on_project_id"
   end
@@ -61,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_180359) do
   create_table "investigators", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.string "id_card", null: false
+    t.string "id_card"
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -69,13 +69,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_180359) do
 
   create_table "minutes", force: :cascade do |t|
     t.integer "number", null: false
-    t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "creation_date", null: false
+    t.date "acceptation_date"
   end
 
   create_table "notices", force: :cascade do |t|
-    t.string "code"
+    t.string "code", null: false
     t.integer "transaction_record_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -86,8 +87,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_180359) do
     t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "project_id"
-    t.integer "investigator_id"
+    t.integer "project_id", null: false
+    t.integer "investigator_id", null: false
     t.index ["investigator_id"], name: "index_project_investigators_on_investigator_id"
     t.index ["project_id"], name: "index_project_investigators_on_project_id"
   end
@@ -105,7 +106,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_180359) do
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "agreement_id"
+    t.integer "agreement_id", null: false
     t.index ["agreement_id"], name: "index_transaction_records_on_agreement_id"
   end
 
