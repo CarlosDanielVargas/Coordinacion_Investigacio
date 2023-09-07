@@ -1,0 +1,8 @@
+<%= link_to edit_individual_path(individual), class: 'btn btn-outline-primary' do %>
+  <i class="bi bi-pencil"></i>
+  Editar
+<% end %>
+<%= link_to individual, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Estás seguro?' }, class: 'btn btn-outline-danger' do %>
+  <i class="bi bi-trash"></i>
+  Eliminar
+<% end %>

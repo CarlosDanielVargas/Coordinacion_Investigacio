@@ -4,11 +4,10 @@
       <h1 class="text-center">Investigadores</h1>
     </div>
   </div>
-  <%= render 'investigator_filter' %>
+  <%= render 'individual_filter' %>
   <div class="row mt-4 mb-4">
     <div id="investigators">
-      <%= render 'shared/investigator_table', view: 'individual' %>
+      <%= render 'shared/individual_table', view: 'individual' %>
     </div>
   </div>
 </div>
-<%= link_to "New individual", new_investigator_path %>

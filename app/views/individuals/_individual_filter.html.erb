@@ -1,4 +1,4 @@
-<%= search_form_for @q, url: search_investigators_path, data: { turbo: false } do |f| %>
+<%= search_form_for @q, url: search_individuals_path, data: { turbo: false } do |f| %>
   <div class="row">
     <%= f.label :first_name, 'Nombre' %>
     <%= f.text_field :first_name_cont, class: "form-control" %>

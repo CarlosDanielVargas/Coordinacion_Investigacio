@@ -15,24 +15,24 @@
     </tr>
   </thead>
   <tbody data-select-target="tableRows">
-    <% @individuals.each do |investigator| %>
+    <% @individuals.each do |individual| %>
       <% if view != 'individual' %>
         <tr data-select-target="hidden">
       <% else %>
         <tr>
       <% end %>
-        <td><%= investigator.id_card %></td>
-        <td><%= investigator.first_name %></td>
-        <td><%= investigator.last_name %></td>
-        <td><%= investigator.email %></td>
+        <td><%= individual.id_card %></td>
+        <td><%= individual.first_name %></td>
+        <td><%= individual.last_name %></td>
+        <td><%= individual.email %></td>
         <td>
           <% if view == 'individual' %>
             <div class="btn-group gap-2">
-              <%= render 'individuals/investigator_table_actions', individual: investigator %>
+              <%= render 'individuals/individual_table_actions', individual: individual %>
             </div>
           <% else %>
-            <%= f.fields_for :individuals do |investigator_subform| %>
-              <%= render 'projects/project_form/add_investigator_actions', investigador: investigator, investigator_subform: investigator_subform %>
+            <%= f.fields_for :individuals do |individual_subform| %>
+              <%= render 'projects/project_form/add_individual_actions', investigador: individual, individual_subform: individual_subform %>
             <%end%>
           <% end %>
         </td>
