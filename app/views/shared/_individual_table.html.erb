@@ -5,6 +5,7 @@
       <th>Nombre</th>
       <th>Apellido</th>
       <th>Email</th>
+      <th>Tipo</th>
       <th>
         <% if view == 'individual' %>
           Acciones
@@ -25,6 +26,7 @@
         <td><%= individual.first_name %></td>
         <td><%= individual.last_name %></td>
         <td><%= individual.email %></td>
+        <td><%= Individual.individual_types.to_a[individual.individual_type.to_i][0] %></td>
         <td>
           <% if view == 'individual' %>
             <div class="btn-group gap-2">

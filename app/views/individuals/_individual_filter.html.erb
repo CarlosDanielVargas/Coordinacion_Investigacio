@@ -15,6 +15,10 @@
     <%= f.label :id_card, 'Cédula' %>
     <%= f.text_field :id_card_start, class: "form-control" %>
   </div>
+  <div class="row">
+    <%= f.label :id_card, 'Tipo' %>
+    <%= f.select :individual_type_eq, options_for_select(Individual.individual_types.keys.map { |key| [key.capitalize, key] }), { include_blank: true }, class: "form-control" %>
+  </div>
   <div class="action mt-3 text-end">
     <%= f.submit 'Buscar', class: "btn btn-secondary" %>
   </div>

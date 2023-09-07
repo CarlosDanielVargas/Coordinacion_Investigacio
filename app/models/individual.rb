@@ -15,7 +15,7 @@ class Individual < ApplicationRecord
   has_many :requests, dependent: :destroy
 
   # Enum
-  enum type: [:Investigador, :Solicitante]
+  enum individual_type: [:Investigador, :Solicitante]
 
   # Methods
   def to_s
@@ -28,6 +28,6 @@ class Individual < ApplicationRecord
 
   private
   def set_default_type
-    self.type ||= :Investigador
+    self.individual_type ||= :Investigador
   end
 end

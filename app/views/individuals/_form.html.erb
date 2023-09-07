@@ -47,7 +47,7 @@
         <%= form.label "Tipo", style: "display: block"%>
       </div>
       <div class="col-10">
-        <%= form.select :individual_type, Individual.types.keys.map { |key| [key.capitalize, key] }, class: "form-control" %>
+        <%= form.select :individual_type, Individual.individual_types.keys.map { |key| [key.capitalize, key] }, class: "form-control" %>
       </div>
     </div>
     <div class="row text-center">
