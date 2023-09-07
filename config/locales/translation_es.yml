@@ -84,7 +84,7 @@ es:
         project_investigators: Investigadores del proyecto  #g
 
       project_investigator:
-        investigator: :activerecord.models.investigator  #g
+        investigator: :activerecord.models.individual  #g
         project: :activerecord.models.project  #g
         role: Role  #g
 

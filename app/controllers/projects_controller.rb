@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    if @investigators.empty?
+    if @individuals.empty?
       flash[:notice] = "No se han agregado investigadores a la base de datos. Para agregar un proyecto, debe agregar al menos un investigador."
       redirect_to new_investigator_path
     else
@@ -88,7 +88,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_investigators
-    @investigators = Investigator.all
+    @individuals = Individual.all
     @selected_investigator_id = @project.principal_investigator.id unless @project.nil?
   end
 
@@ -107,13 +107,13 @@ class ProjectsController < ApplicationController
     if params[:project][:principal_investigator].nil? then return end
     # Investigador principal
     principal_investigator_id_card = params[:project][:principal_investigator].split(" (")[1].split(")")[0]
-    principal_investigator = Investigator.find_by(id_card: principal_investigator_id_card)
+    principal_investigator = Individual.find_by(id_card: principal_investigator_id_card)
     @investigators_to_add << principal_investigator
 
-    if params[:project][:investigators].nil? then return end
+    if params[:project][:individuals].nil? then return end
     # Investigadores asociados
-    params[:project][:investigators].each { |investigator|
-      if investigator[1] == "1" then @investigators_to_add << Investigator.find(investigator[0]) end
+    params[:project][:individuals].each { |investigator|
+      if investigator[1] == "1" then @investigators_to_add << Individual.find(investigator[0]) end
     }
   end
 

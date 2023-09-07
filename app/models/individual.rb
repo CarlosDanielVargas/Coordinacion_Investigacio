@@ -1,4 +1,4 @@
-class Investigator < ApplicationRecord
+class Individual < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :id_card, presence: true, uniqueness: true

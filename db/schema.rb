@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_231850) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_07_024340) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -58,13 +58,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_231850) do
     t.index ["project_id"], name: "index_articles_on_project_id"
   end
 
-  create_table "investigators", force: :cascade do |t|
+  create_table "individuals", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "id_card"
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "type", default: 0
   end
 
   create_table "minutes", force: :cascade do |t|
@@ -97,6 +98,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_231850) do
     t.string "preAcceptanceCode"
     t.string "finalCode"
     t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.string "title"
+    t.date "date"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -137,7 +146,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_231850) do
   add_foreign_key "articles", "minutes"
   add_foreign_key "articles", "projects"
   add_foreign_key "notices", "transaction_records"
-  add_foreign_key "project_investigators", "investigators"
+  add_foreign_key "project_investigators", "individuals", column: "investigator_id"
   add_foreign_key "project_investigators", "projects"
   add_foreign_key "transaction_records", "agreements"
 end

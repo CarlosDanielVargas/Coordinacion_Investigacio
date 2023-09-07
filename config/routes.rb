@@ -15,9 +15,9 @@ Rails.application.routes.draw do
                        registrations: "users/registrations",
                      }
 
-  resources :investigators do
+  resources :individuals do
     collection do
-      match 'search' => 'investigators#search', via: [:get, :post], as: :search
+      match 'search' => 'individuals#search', via: [:get, :post], as: :search
     end
   end
 end

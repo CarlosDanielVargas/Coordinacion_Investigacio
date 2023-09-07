@@ -3,7 +3,7 @@
     <h6 class="text-center">Investigador principal</h6>
   </div>
   <div class="col-7">
-    <%= form.select :principal_investigator, options_for_select(@investigators.all, @selected_investigator_id), {}, data: { select_target: "select", action: "select#select" }, class: "form-select"%>
+    <%= form.select :principal_investigator, options_for_select(@individuals.all, @selected_investigator_id), {}, data: { select_target: "select", action: "select#select" }, class: "form-select"%>
   </div>
 </div>
 <div class="row mt-4">
@@ -11,6 +11,6 @@
     <h6>Investigadores asociados</h6>
   </div>
   <div class="row">
-    <%= render 'shared/investigator_table', investigators: @investigators, view: 'project', f: form %>
+    <%= render 'shared/investigator_table', individuals: @individuals, view: 'project', f: form %>
   </div>
 </div>

@@ -7,7 +7,7 @@ class ChangeNulleableToNotNulleableCollumns < ActiveRecord::Migration[7.0]
     change_column_null :articles, :minute_id, false
     change_column_null :articles, :project_id, false
     change_column_null :agreements, :article_id, false
-    change_column_null :investigators, :id_card, true
+    change_column_null :individuals, :id_card, true
     change_column_null :transaction_records, :agreement_id, false
   end
 end

@@ -5,7 +5,7 @@ class MinutesController < ApplicationController
   # GET /minutes or /minutes.json
   def index
     @q = Minute.ransack(params[:q])
-    @minutes = @q.result(distinct: true).includes(:projects, :investigators)
+    @minutes = @q.result(distinct: true).includes(:projects, :individuals)
 
     if params[:q].nil?
       @minutes = Minute.all.paginate(page: params[:page], per_page: 7)
@@ -19,7 +19,7 @@ class MinutesController < ApplicationController
 
     q_investigator = params[:q][:investigator_id_eq]
     if q_investigator.present?
-      @minutes = @minutes.where(investigators: { id: q_investigator })
+      @minutes = @minutes.where(individuals: { id: q_investigator })
     end
 
     @minutes = @minutes.distinct.paginate(page: params[:page], per_page: 7)

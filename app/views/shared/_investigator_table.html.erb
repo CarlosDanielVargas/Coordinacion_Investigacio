@@ -6,7 +6,7 @@
       <th>Apellido</th>
       <th>Email</th>
       <th>
-        <% if view == 'investigator' %>
+        <% if view == 'individual' %>
           Acciones
         <% else %>
           Agregar al proyecto
@@ -15,8 +15,8 @@
     </tr>
   </thead>
   <tbody data-select-target="tableRows">
-    <% @investigators.each do |investigator| %>
-      <% if view != 'investigator' %>
+    <% @individuals.each do |investigator| %>
+      <% if view != 'individual' %>
         <tr data-select-target="hidden">
       <% else %>
         <tr>
@@ -26,12 +26,12 @@
         <td><%= investigator.last_name %></td>
         <td><%= investigator.email %></td>
         <td>
-          <% if view == 'investigator' %>
+          <% if view == 'individual' %>
             <div class="btn-group gap-2">
-              <%= render 'investigators/investigator_table_actions', investigator: investigator %>
+              <%= render 'individuals/investigator_table_actions', individual: investigator %>
             </div>
           <% else %>
-            <%= f.fields_for :investigators do |investigator_subform| %>
+            <%= f.fields_for :individuals do |investigator_subform| %>
               <%= render 'projects/project_form/add_investigator_actions', investigador: investigator, investigator_subform: investigator_subform %>
             <%end%>
           <% end %>

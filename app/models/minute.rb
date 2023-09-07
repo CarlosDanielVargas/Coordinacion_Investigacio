@@ -9,7 +9,7 @@ class Minute < ApplicationRecord
     has_many :transaction_records, through: :agreements
     has_many :notices, through: :transaction_records
     has_many :project_investigators, through: :projects
-    has_many :investigators, through: :project_investigators
+    has_many :individuals, through: :project_investigators
 
     accepts_nested_attributes_for :articles, allow_destroy: true, reject_if: proc { |attr| attr["code"].blank? }
 
@@ -18,7 +18,7 @@ class Minute < ApplicationRecord
     end
 
     def self.ransackable_associations(auth_object = nil)
-        ["project", "investigator"]
+        ["project", "individual"]
     end
 
     def to_s
