@@ -19,7 +19,7 @@
     <hr>
     <div data-controller="select" data-select-hidden-class="hidden" class="row" data-action="<%= action_name %>">
       <h5>Agregar investigadores al proyecto</h5>
-      <%= render 'projects/add_individual_form', project: @project, individuals: @individuals, form: form %>
+      <%= render 'projects/project_form/add_individual_form', project: @project, individuals: @individuals, form: form %>
     </div>
     <div class="row text-center mt-5">
       <div class="col">

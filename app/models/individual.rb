@@ -28,6 +28,8 @@ class Individual < ApplicationRecord
 
   private
   def set_default_type
-    self.individual_type ||= :Investigador
+    if self.individual_type.nil?
+      self.individual_type ||= :Investigador
+    end
   end
 end

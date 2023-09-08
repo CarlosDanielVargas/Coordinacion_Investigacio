@@ -88,7 +88,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_investigators
-    @individuals = Individual.all
+    @individuals = Individual.where(individual_type: 'Investigador')
     @selected_investigator_id = @project.principal_investigator.id unless @project.nil?
   end
 

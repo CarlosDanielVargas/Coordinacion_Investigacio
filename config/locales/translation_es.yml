@@ -13,6 +13,8 @@ es:
       project_investigator: investigador del proyecto  #g
       transaction_record: Registro de la transacción  #g
       user: Usuario  #g
+      individual: individual  #g
+      request: request  #g
 
     attributes:
       active_storage/attachment:
@@ -45,6 +47,8 @@ es:
         code: Código  #g
         description: Descripción  #g
         transaction_records: Registros de transacciones  #g
+        minute: :activerecord.models.minute  #g
+        notices: notices  #g
 
       article:
         agreements: Acuerdos  #g
@@ -67,12 +71,22 @@ es:
         file_blob: :activerecord.models.file_blob  #g
         number: Número  #g
         projects: Proyectos  #g
+        acceptation_date: acceptation_date  #g
+        agreements: agreements  #g
+        creation_date: creation_date  #g
+        individuals: individuals  #g
+        notices: notices  #g
+        project_investigators: project_investigators  #g
+        transaction_records: transaction_records  #g
 
       notice:
         code: Código  #g
         file_attachment: :activerecord.models.file_attachment  #g
         file_blob: :activerecord.models.file_blob  #g
         transaction_record: :activerecord.models.transaction_record  #g
+        agreement: :activerecord.models.agreement  #g
+        article: :activerecord.models.article  #g
+        minute: :activerecord.models.minute  #g
 
       project:
         articles: Artículos  #g
@@ -82,17 +96,21 @@ es:
         name: Nombre  #g
         preAcceptanceCode: código de preaceptación  #g
         project_investigators: Investigadores del proyecto  #g
+        individuals: individuals  #g
 
       project_investigator:
         investigator: :activerecord.models.individual  #g
         project: :activerecord.models.project  #g
         role: Role  #g
+        individual: :activerecord.models.individual  #g
 
       transaction_record:
         agreement: :activerecord.models.agreement  #g
         description: Descripción  #g
         notices: Avisos  #g
         status: Estado  #g
+        article: :activerecord.models.article  #g
+        minute: :activerecord.models.minute  #g
 
       user:
         confirmation_sent_at: Confirmación enviada a  #g
@@ -106,5 +124,21 @@ es:
         remember_created_at: Recordar creado en  #g
         reset_password_sent_at: Restablecer contraseña enviada a  #g
         reset_password_token: Restablecer token de contraseña  #g
-        role: Role  #g
+        role: Rol  #g
         unconfirmed_email: Correo electrónico no confirmado  #g
+
+      individual:
+        email: email  #g
+        first_name: Nombre  #g
+        id_card: Cédula  #g
+        individual_type: Tipo  #g
+        last_name: Apellidos  #g
+        project_investigators: Investigadores  #g
+        projects: Proyectos  #g
+        requests: Solicitudes  #g
+
+      request:
+        date: Fecha  #g
+        description: Descripción  #g
+        individual: :activerecord.models.individual  #g
+        title: Título  #g

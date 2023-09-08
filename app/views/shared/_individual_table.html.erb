@@ -26,7 +26,7 @@
         <td><%= individual.first_name %></td>
         <td><%= individual.last_name %></td>
         <td><%= individual.email %></td>
-        <td><%= Individual.individual_types.to_a[individual.individual_type.to_i][0] %></td>
+        <td><%= individual.individual_type %></td>
         <td>
           <% if view == 'individual' %>
             <div class="btn-group gap-2">
@@ -34,7 +34,7 @@
             </div>
           <% else %>
             <%= f.fields_for :individuals do |individual_subform| %>
-              <%= render 'projects/project_form/add_individual_actions', investigador: individual, individual_subform: individual_subform %>
+              <%= render 'projects/project_form/add_individual_actions', investigador: individual, investigator_subform: individual_subform %>
             <%end%>
           <% end %>
         </td>

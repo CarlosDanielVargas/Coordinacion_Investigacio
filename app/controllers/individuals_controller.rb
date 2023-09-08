@@ -3,7 +3,7 @@ class IndividualsController < ApplicationController
 
   # GET /individuals or /individuals.json
   def index
-    #byebug
+    byebug
     @q = Individual.ransack(params[:q])
     @q.combinator = 'or'
     @individuals = @q.result
@@ -29,6 +29,7 @@ class IndividualsController < ApplicationController
 
   # POST /individuals or /individuals.json
   def create
+    byebug
     @individual = Individual.new(investigator_params)
 
     respond_to do |format|
@@ -73,6 +74,6 @@ class IndividualsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def investigator_params
-      params.require(:individual).permit(:first_name, :last_name, :id_card, :email)
+      params.require(:individual).permit(:first_name, :last_name, :id_card, :email, :individual_type)
     end
 end
