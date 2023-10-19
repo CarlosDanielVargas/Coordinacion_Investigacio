@@ -1,0 +1,21 @@
+<div class="container p-5">
+  <%= form_with(model: request) do |form| %>
+    <div class="form-group">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label "Fecha de realización de la solicitud" %>
+      <%= form.date_field :date, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label "Solicitante" %>
+      <%= form.collection_select :individual_id, @individuals.all, :id, :to_s, {}, class: "form-select" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :description %>
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
+    <%= form.submit "Guardar", class: "btn btn-primary" %>
+  <% end %>
+</div>

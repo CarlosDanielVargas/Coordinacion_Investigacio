@@ -16,7 +16,7 @@
 
     <div class="field">
         <%= f.label :project_investigators_id_eq, "Investigador" %>
-        <%= f.collection_select :project_investigators_id_eq, Investigator.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select" } %>
+        <%= f.collection_select :project_investigators_id_eq, Individual.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select" } %>
     </div>
 
     <div class="action mt-3 text-end">

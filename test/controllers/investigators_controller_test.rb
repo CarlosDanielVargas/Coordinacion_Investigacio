@@ -2,7 +2,7 @@ require "test_helper"
 
 class InvestigatorsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @investigator = investigators(:one)
+    @individual = investigators(:one)
   end
 
   test "should get index" do
@@ -15,32 +15,32 @@ class InvestigatorsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create investigator" do
-    assert_difference("Investigator.count") do
-      post investigators_url, params: { investigator: { email: @investigator.email, first_name: @investigator.first_name, id_card: @investigator.id_card, last_name: @investigator.last_name } }
+  test "should create individual" do
+    assert_difference("Individual.count") do
+      post investigators_url, params: { individual: { email: @individual.email, first_name: @individual.first_name, id_card: @individual.id_card, last_name: @individual.last_name } }
     end
 
-    assert_redirected_to investigator_url(Investigator.last)
+    assert_redirected_to investigator_url(Individual.last)
   end
 
-  test "should show investigator" do
-    get investigator_url(@investigator)
+  test "should show individual" do
+    get investigator_url(@individual)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_investigator_url(@investigator)
+    get edit_investigator_url(@individual)
     assert_response :success
   end
 
-  test "should update investigator" do
-    patch investigator_url(@investigator), params: { investigator: { email: @investigator.email, first_name: @investigator.first_name, id_card: @investigator.id_card, last_name: @investigator.last_name } }
-    assert_redirected_to investigator_url(@investigator)
+  test "should update individual" do
+    patch investigator_url(@individual), params: { individual: { email: @individual.email, first_name: @individual.first_name, id_card: @individual.id_card, last_name: @individual.last_name } }
+    assert_redirected_to investigator_url(@individual)
   end
 
-  test "should destroy investigator" do
-    assert_difference("Investigator.count", -1) do
-      delete investigator_url(@investigator)
+  test "should destroy individual" do
+    assert_difference("Individual.count", -1) do
+      delete investigator_url(@individual)
     end
 
     assert_redirected_to investigators_url

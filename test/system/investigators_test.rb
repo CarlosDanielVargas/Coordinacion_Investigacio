@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class InvestigatorsTest < ApplicationSystemTestCase
   setup do
-    @investigator = investigators(:one)
+    @individual = investigators(:one)
   end
 
   test "visiting the index" do
@@ -10,38 +10,38 @@ class InvestigatorsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Investigators"
   end
 
-  test "should create investigator" do
+  test "should create individual" do
     visit investigators_url
-    click_on "New investigator"
+    click_on "New individual"
 
-    fill_in "Email", with: @investigator.email
-    fill_in "First name", with: @investigator.first_name
-    fill_in "Id card", with: @investigator.id_card
-    fill_in "Last name", with: @investigator.last_name
-    click_on "Create Investigator"
+    fill_in "Email", with: @individual.email
+    fill_in "First name", with: @individual.first_name
+    fill_in "Id card", with: @individual.id_card
+    fill_in "Last name", with: @individual.last_name
+    click_on "Create Individual"
 
-    assert_text "Investigator was successfully created"
+    assert_text "Individual was successfully created"
     click_on "Back"
   end
 
-  test "should update Investigator" do
-    visit investigator_url(@investigator)
-    click_on "Edit this investigator", match: :first
+  test "should update Individual" do
+    visit investigator_url(@individual)
+    click_on "Edit this individual", match: :first
 
-    fill_in "Email", with: @investigator.email
-    fill_in "First name", with: @investigator.first_name
-    fill_in "Id card", with: @investigator.id_card
-    fill_in "Last name", with: @investigator.last_name
-    click_on "Update Investigator"
+    fill_in "Email", with: @individual.email
+    fill_in "First name", with: @individual.first_name
+    fill_in "Id card", with: @individual.id_card
+    fill_in "Last name", with: @individual.last_name
+    click_on "Update Individual"
 
-    assert_text "Investigator was successfully updated"
+    assert_text "Individual was successfully updated"
     click_on "Back"
   end
 
-  test "should destroy Investigator" do
-    visit investigator_url(@investigator)
-    click_on "Destroy this investigator", match: :first
+  test "should destroy Individual" do
+    visit investigator_url(@individual)
+    click_on "Destroy this individual", match: :first
 
-    assert_text "Investigator was successfully destroyed"
+    assert_text "Individual was successfully destroyed"
   end
 end

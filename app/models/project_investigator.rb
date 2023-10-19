@@ -1,10 +1,10 @@
 class ProjectInvestigator < ApplicationRecord
     belongs_to :project
-    belongs_to :investigator
+    belongs_to :individual
 
     enum role: [:principal, :co_investigator, :collaborator]
 
     def full_name
-        self.investigator.first_name + " " + self.investigator.last_name
+        self.individual.first_name + " " + self.individual.last_name
     end
 end

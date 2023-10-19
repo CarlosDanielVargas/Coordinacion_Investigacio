@@ -4,7 +4,7 @@ class Project < ApplicationRecord
   validates :finalCode, presence: true, uniqueness: true
   
   has_many :project_investigators, dependent: :destroy
-  has_many :investigators, through: :project_investigators
+  has_many :individuals, through: :project_investigators
   has_many :articles, dependent: :destroy
   has_many :minutes, through: :articles
 
@@ -24,7 +24,7 @@ class Project < ApplicationRecord
   def principal_investigator
     return "--" if self.project_investigators.empty?
     inv = self.project_investigators.find_by(role: "principal")
-    inv = Investigator.find_by(id: inv.investigator_id)
+    inv = Individual.find_by(id: inv.investigator_id)
   end
 
   def to_s

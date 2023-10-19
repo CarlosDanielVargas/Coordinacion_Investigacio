@@ -9,7 +9,7 @@
   </div>
   <div class="field">
     <%= f.label :investigator_id_eq, "Investigador" %>
-    <%= f.collection_select :investigator_id_eq, Investigator.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select" } %>
+    <%= f.collection_select :investigator_id_eq, Individual.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select" } %>
   </div>
 
   <div class="action mt-3 text-end">

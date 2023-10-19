@@ -1,0 +1,44 @@
+<table class="table table-hover text-center">
+  <thead>
+    <tr>
+      <th>Cédula</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Email</th>
+      <th>Tipo</th>
+      <th>
+        <% if view == 'individual' %>
+          Acciones
+        <% else %>
+          Agregar al proyecto
+        <% end %>
+      </th>
+    </tr>
+  </thead>
+  <tbody data-select-target="tableRows">
+    <% @individuals.each do |individual| %>
+      <% if view != 'individual' %>
+        <tr data-select-target="hidden">
+      <% else %>
+        <tr>
+      <% end %>
+        <td><%= individual.id_card %></td>
+        <td><%= individual.first_name %></td>
+        <td><%= individual.last_name %></td>
+        <td><%= individual.email %></td>
+        <td><%= individual.individual_type %></td>
+        <td>
+          <% if view == 'individual' %>
+            <div class="btn-group gap-2">
+              <%= render 'individuals/individual_table_actions', individual: individual %>
+            </div>
+          <% else %>
+            <%= f.fields_for :individuals do |individual_subform| %>
+              <%= render 'projects/project_form/add_individual_actions', investigador: individual, investigator_subform: individual_subform %>
+            <%end%>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
