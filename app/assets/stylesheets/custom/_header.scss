@@ -1,0 +1,136 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.header {
+    background-color: v.$primary;
+
+    &__container {
+        padding: .5rem 0 1.5rem;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        @include m.tablet {
+            gap: .8rem;
+            padding: .5rem 0;
+            align-items: start;
+        }
+        
+        @include m.desktop {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0;
+        }
+    }
+
+    &__logos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .2rem;
+
+        @include m.tablet {
+            flex-direction: row;
+            gap: 1rem;
+        }
+    }
+
+    &__logo:last-of-type {
+        width: 80%;
+        @include m.tablet {
+            width: 100%;
+        }
+    }
+
+    &__actions {
+        display: none;
+
+        @include m.desktop {
+            display: block;
+        }
+    }
+}
+
+.navbar {
+    background-color: #80AED2;
+    line-height: 1;
+    padding: 0;
+
+    & > .container {
+        justify-content: center;
+    }
+
+    .navbar-expand-lg {
+        width: 100%;
+    }
+
+    .navbar-nav {
+        padding: .7rem 0;
+
+        @include m.desktop {
+            padding: .3rem 0;
+        }
+    }
+
+    .navbar-expand-lg .navbar-nav {
+        gap: 1rem;
+        font-size: 18px;
+
+        @include m.desktop {
+            gap: 6rem;
+        }
+    }
+
+    .nav-link {
+        color: v.$light;
+        font-weight: bold;
+        text-align: center;
+
+        &--logout {
+            @include m.desktop {
+                display: none;
+            }
+        }
+    }
+
+    &__menu-logo {
+        width: 25px;
+    }
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @include m.desktop {
+            justify-content: center;
+        }
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__collapse {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__toggler {
+        color: v.$light;
+        font-size: v.$fs-rg;
+        padding: 1rem 0;
+
+        &:hover {
+            color: v.$light;
+        }
+
+        @include m.desktop {
+            display: none;
+        }
+    }
+}

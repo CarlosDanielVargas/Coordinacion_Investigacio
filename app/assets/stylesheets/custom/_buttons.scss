@@ -1,0 +1,6 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.btn__primary {
+    @include m.button(v.$secondary, v.$light);
+}
