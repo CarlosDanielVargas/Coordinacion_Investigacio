@@ -1,3 +1,6 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
 /* GLOBALS */
 
 //HTML STRUCTURE
@@ -20,6 +23,41 @@ html {
     box-sizing: inherit;
 }
 
-header {
-    margin-bottom: 2rem;
+body {
+    // Font
+    font-family: v.$font-family;
+    font-size: v.$fs-rg;
+    font-weight: normal;
+    line-height: 1.5;
+    color: v.$dark;
+
+    // Background
+    background-color: white;
+
+    // Positioning
+    min-height: 100vh;
+    position: relative;
+}
+
+h1, h2, h3 {
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: v.$light;
+
+    &:hover {
+        color: v.$primary !important;
+    }
+}
+
+img {
+    max-width: 100%;
+    display: block;
 }
