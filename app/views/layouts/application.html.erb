@@ -14,9 +14,13 @@
   </head>
 
   <body>
-    <%= render "shared/navbar" %>
-    <%# render "shared/navigation" %>
-    <%= render "/shared/devise_notifications" %>
-    <%= yield %>
+    <div class="flex-wrapper">
+      <div class="wapper-content">
+        <%= render "shared/navbar" %>
+        <%= render "/shared/devise_notifications" %>
+        <%= yield %>
+      </div>
+      <%= render "shared/footer" %>
+    </div>
   </body>
 </html>
