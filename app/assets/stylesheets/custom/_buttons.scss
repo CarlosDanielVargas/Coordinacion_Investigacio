@@ -4,3 +4,7 @@
 .btn__primary {
     @include m.button(v.$secondary, v.$light);
 }
+
+.btn__login {
+    @include m.button(v.$primary, v.$light);
+}

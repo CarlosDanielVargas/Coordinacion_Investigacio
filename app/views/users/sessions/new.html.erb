@@ -1,34 +1,38 @@
-<div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <h1 class="text-center">Iniciar sesión</h1>
+<main class="login">
+  <div class="login__left-side" style="background-image: url(<%= asset_path('login-bg.png') %>">
+    <div class="login__content">
+      <%= image_tag('login-ucr_logo.svg', alt: "UCR Login logo", class: "login__logo") %>
+
+      <p class="login__copyright">© 2023 UNIVERSIDAD DE COSTA RICA | SO-CI</p>
     </div>
   </div>
-  <div class="row">
-    <div class="d-grid gap-2 ">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="form-group">
-          <%= f.label :email %>
-          <%= f.text_field :email, class: "form-control" %>
+  
+  <div class="login__right-side">
+    <div class="login__content">
+      <%= image_tag('login-soci_logo.svg', alt: "SO-CI Login logo", class: "login__logo login__logo--soci mb-4") %>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "login__form") do |f| %>
+        <div class="login__form-field">
+          <%= f.label :email, class: "login__form-label fw-bold" %>
+          <%= f.text_field :email, class: "login__form-input login__form-input--email form-control", placeholder: "Correo electrónico" %>
         </div>
-        <br>
-        <div class="form-group">
-          <%= f.label :password %>
-          <%= f.password_field :password, class: "form-control" %>
+
+        <div class="login__form-field">
+          <%= f.label :password, class: "login__form-label fw-bold" %>
+          <%= f.password_field :password, class: "login__form-input login__form-input--password form-control", placeholder: "Contraseña" %>
         </div>
-        <br>
+
         <% if devise_mapping.rememberable? %>
-          <div class="form-group">
+          <div class="login__form-field">
             <%= f.check_box :remember_me %>
-            <%= f.label :remember_me, "Recordarme" %>
+            <%= f.label :remember_me, "Recordarme", class: "login__form-label" %>
           </div>
         <% end %>
-        <br>
-        <div class="form-group">
-          <%= f.submit "Iniciar sesión", class: "btn btn-primary" %>
+
+        <div class="login__form-action">
+          <%= f.submit "INICIAR SESIÓN", class: "btn__login w-100 fw-bold" %>
         </div>
       <% end %>
-      <%= render "users/shared/links" %>
     </div>
   </div>
-</div>
+</main>
