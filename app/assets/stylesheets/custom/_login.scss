@@ -22,7 +22,7 @@
         width: 0%;
         
         @include m.desktop {
-            width: 80%;
+            width: 90%;
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
@@ -56,9 +56,17 @@
     &__logo {
         max-width: 300px;
 
+        @include m.desktop-xl {
+            max-width: 400px;
+        }
+
         &--soci {
             @include m.desktop {
                 max-width: 400px;
+            }
+
+            @include m.desktop-xl {
+                max-width: 500px;
             }
         }
     }
