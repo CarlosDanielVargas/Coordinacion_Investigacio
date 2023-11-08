@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="header__actions">
-                    <%= button_to "CERRAR SESIÓN", destroy_user_session_path, method: :delete, form: { data: { 'turbo-confirm': '¿Está seguro(a) que deseas salir?' } }, class: "header__button btn__primary" %>
+                    <%= button_to "CERRAR SESIÓN", destroy_user_session_path, method: :delete, form: { data: { 'turbo-confirm': '¿Está seguro(a) que desea cerrar sesión?' } }, class: "header__button btn__secondary" %>
                 </div>
             </div>
         </div>
@@ -116,7 +116,7 @@
 
                             <%# LOGOUT MOBILE ONLY %>
                             <li class="header__navbar-item nav-item">
-                                <%= button_to "CERRAR SESIÓN", destroy_user_session_path, method: :delete, form: { data: { 'turbo-confirm': '¿Está seguro(a) que deseas salir?' } }, class: "header__navbar-link header__navbar-link--logout btn__primary" %>
+                                <%= button_to "CERRAR SESIÓN", destroy_user_session_path, method: :delete, form: { data: { 'turbo-confirm': '¿Está seguro(a) que desea cerrar sesión?' } }, class: "header__navbar-link header__navbar-link--logout btn__secondary" %>
                             </li>
                         </ul>
                     </div>

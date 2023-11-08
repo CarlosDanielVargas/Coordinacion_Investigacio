@@ -45,13 +45,21 @@
     }
 }
 
+//GRID
+@mixin grid($columns, $spacing) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    column-gap: $spacing;
+    row-gap: 10px;
+}
+
 //BUTTONS
 @mixin button($bg-color, $txt-color) {
     width: 100%;
     display: block;
 
     text-align: center;
-    font-weight: 500;
+    font-weight: bold;
     padding: 10px 20px;
     font-size: v.$fs-sm;
     

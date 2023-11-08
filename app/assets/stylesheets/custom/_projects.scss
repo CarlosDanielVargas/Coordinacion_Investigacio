@@ -1,0 +1,80 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.projects {
+    &__header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        gap: .2rem;
+
+        @include m.tablet {
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: none;
+            gap: 0;
+        }
+    }
+
+    &__title {
+        color: v.$primary;
+    }
+
+    &__filters,
+    &__body {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        background-color: v.$section-bg;
+        box-shadow: v.$box-shadow-sm;
+        border-radius: v.$border-radius-sm;
+        -webkit-border-radius: v.$border-radius-sm;
+        -moz-border-radius: v.$border-radius-sm;
+        -ms-border-radius: v.$border-radius-sm;
+        -o-border-radius: v.$border-radius-sm;
+
+        @include m.tablet {
+            padding: 1.5rem 2rem;
+        }
+    }
+
+    &__filters-form {
+        @include m.tablet {
+            @include m.grid(2, .5rem);
+        }
+
+        @include m.desktop {
+            @include m.grid(4, .5rem);
+        }
+    }
+
+    &__filters-field {
+        margin-bottom: .7rem;
+
+        @include m.tablet {
+            margin-bottom: .3rem;
+        }
+
+        @include m.desktop {
+            margin-bottom: 0;
+        }
+    }
+
+    &__filters-label {
+        margin-bottom: .1rem;
+    }
+
+    &__section-header {
+        color: v.$grey;
+
+        &--filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__section-title {
+        font-size: 16px;
+    }
+}

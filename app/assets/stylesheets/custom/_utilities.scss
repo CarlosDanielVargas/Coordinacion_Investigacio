@@ -8,3 +8,19 @@
     height: 100%;
     gap: 4rem;
 }
+
+.tablet-display {
+    display: none;
+
+    @include m.tablet {
+        display: inline-block;
+    }
+}
+
+.desktop-display {
+    display: none;
+
+    @include m.desktop {
+        display: inline-block;
+    }
+}
