@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_08_205915) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_08_214817) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -53,7 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_205915) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "minute_id", null: false
-    t.integer "project_id", null: false
+    t.integer "project_id"
+    t.integer "request_id"
     t.index ["minute_id"], name: "index_articles_on_minute_id"
     t.index ["project_id"], name: "index_articles_on_project_id"
   end
@@ -147,6 +148,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_205915) do
   add_foreign_key "agreements", "articles"
   add_foreign_key "articles", "minutes"
   add_foreign_key "articles", "projects"
+  add_foreign_key "articles", "requests"
   add_foreign_key "notices", "transaction_records"
   add_foreign_key "project_investigators", "individuals", column: "investigator_id"
   add_foreign_key "project_investigators", "projects"

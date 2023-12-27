@@ -5,6 +5,7 @@ class Request < ApplicationRecord
   validates :description, presence: true
 
   # Associations
+  has_many :articles
   belongs_to :individual
 
 

@@ -6,13 +6,16 @@
     <div class="col-2">
       <%= f.text_field :code, class: "form-control" %>
     </div>
-    <div class="col-1">
-      <%= f.label :project_id, "Proyecto", style: "display: block" %>
+    <div class="col-2">
+      <%= f.label :project_id, "Proyecto/Solicitud", style: "display: block" %>
     </div>
-    <div class="col-3">
+    <div class="col-1">
       <%= f.select :project_id, options_for_select(@projects.all.map { |project| [project.finalCode + " - " + project.name, project.id] }), {}, class: "form-select" %>
     </div>
-    <div class="col-3 btn-group">
+    <div class="col-1">
+      <%= f.select :request_id, options_for_select(@requests.all.map { |request| [request.individual.first_name + " " + request.individual.last_name + " - " + request.title, request.id] }), {}, class: "form-select" %>
+    </div>
+    <div class="col-2 btn-group">
       <%= link_to_remove_association f, class: "btn btn-danger" do %>
         <i class="bi bi-trash-fill"></i>
       <% end %>
