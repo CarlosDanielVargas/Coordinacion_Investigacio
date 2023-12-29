@@ -90,7 +90,7 @@ class MinutesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def minute_params
-    params.require(:minute).permit(:number, :date, :file,
+    params.require(:minute).permit(:number, :creation_date, :acceptation_date, :file,
                                    articles_attributes: [:id, :_destroy, :code, :minute_id, :project_id,
                                                          agreements_attributes: [:id, :_destroy, :code, :article_id, :description,
                                                                                  transaction_records_attributes: [:id, :_destroy, :description, :status, :agreement_id,

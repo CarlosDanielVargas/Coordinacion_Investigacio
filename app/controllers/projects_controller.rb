@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
   
     q_investigator = params[:q][:project_investigators_id_eq]
     if q_investigator.present?
-      investigator_projects = Project.joins(:project_investigators).where(project_investigators: { investigator_id: q_investigator })
+      investigator_projects = Project.joins(:project_investigators).where(project_investigators: { individual_id: q_investigator })
       @projects = investigator_projects
     else
       @projects = @q.result(distinct: true)
@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
   def new
     if @individuals.empty?
       flash[:notice] = "No se han agregado investigadores a la base de datos. Para agregar un proyecto, debe agregar al menos un investigador."
-      redirect_to new_investigator_path
+      redirect_to new_individual_path
     else
       @project = Project.new
     end
@@ -93,11 +93,12 @@ class ProjectsController < ApplicationController
   end
 
   def add_investigators_to_project
+    byebug
     @investigators_to_add.each { |investigator| 
       if investigator == @investigators_to_add.first then 
-        @project_investigator = ProjectInvestigator.create(project_id: @project.id, investigator_id: investigator.id, role: 0)
+        @project_investigator = ProjectInvestigator.create(project_id: @project.id, individual_id: investigator.id, role: 0)
       else
-         @project_investigator = ProjectInvestigator.create(project_id: @project.id, investigator_id: investigator.id, role: 1) 
+         @project_investigator = ProjectInvestigator.create(project_id: @project.id, individual_id: investigator.id, role: 1)
       end }
   end
 

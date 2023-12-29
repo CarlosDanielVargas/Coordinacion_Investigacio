@@ -24,7 +24,7 @@ class Project < ApplicationRecord
   def principal_investigator
     return "--" if self.project_investigators.empty?
     inv = self.project_investigators.find_by(role: "principal")
-    inv = Individual.find_by(id: inv.investigator_id)
+    inv = Individual.find_by(id: inv.individual_id)
   end
 
   def to_s
