@@ -1,6 +1,6 @@
 class Minute < ApplicationRecord
     validates :number, presence: true
-    validates :date, presence: true
+    validates :creation_date, presence: true
 
     has_one_attached :file
     has_many :articles, dependent: :destroy
@@ -22,6 +22,6 @@ class Minute < ApplicationRecord
     end
 
     def to_s
-        "#{self.number} - #{self.date}"
+        "#{self.number} - #{self.creation_date}"
     end
 end
