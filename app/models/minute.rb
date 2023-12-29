@@ -22,6 +22,6 @@ class Minute < ApplicationRecord
     end
 
     def to_s
-        "#{self.number} - #{self.date}"
+        "#{self.number} - #{self.creation_date}"
     end
 end
