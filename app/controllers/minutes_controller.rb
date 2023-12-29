@@ -46,6 +46,7 @@ class MinutesController < ApplicationController
 
   # POST /minutes or /minutes.json
   def create
+    byebug
     @minute = Minute.new(minute_params)
     respond_to do |format|
       if @minute.save

@@ -1,8 +1,6 @@
 class TransactionRecord < ApplicationRecord
     # Associations
     belongs_to :agreement
-    belongs_to :article
-    belongs_to :minute
     has_many :notices, dependent: :destroy
     accepts_nested_attributes_for :notices, allow_destroy: true, reject_if: proc { |attr| attr["code"].blank? }
 

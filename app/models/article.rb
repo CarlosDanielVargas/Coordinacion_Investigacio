@@ -5,4 +5,5 @@ class Article < ApplicationRecord
   has_many :agreements, dependent: :destroy
 
   accepts_nested_attributes_for :agreements, allow_destroy: true, reject_if: proc { |attr| attr["code"].blank? }
+
 end
