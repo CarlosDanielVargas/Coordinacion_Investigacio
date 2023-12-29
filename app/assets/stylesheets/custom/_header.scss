@@ -1,0 +1,147 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.header {
+    background-color: v.$primary;
+
+    &__content {
+        padding: .5rem 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include m.tablet {
+            justify-content: space-between;
+        }
+    }
+
+    &__logos {
+        width: 95%;
+
+        @include m.tablet {
+            width: auto;
+        }
+    }
+
+    &__divider {
+        display: none;
+
+        @include m.desktop {
+            display: block;
+        }
+
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    }
+
+    &__button,
+    &__navbar-link--logout {
+        font-weight: bold;
+    }
+
+    &__actions {
+        display: none;
+
+        @include m.desktop {
+            display: block;
+        }
+    }
+
+    &__navbar-link--logout {
+        @include m.desktop {
+            display: none;
+        }
+    }
+
+    &__navbar{
+        padding: .3rem 0;
+        //background: linear-gradient(180deg, rgba(0, 94, 165, 0.36) 0%, rgba(0, 94, 165, 0.32) 100%);
+        background-color: #7BA8CB;
+        box-shadow: v.$box-shadow-sm;
+        backdrop-filter: blur(8.5px);
+
+        @include m.desktop {
+            padding: 0;
+        }
+    }
+
+    &__navbar-collapse {
+        justify-content: center;
+    }
+
+    &__navbar-links {
+        padding-bottom: 1.2rem;
+
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        @include m.desktop {
+            gap: 3rem;
+            padding: 0;
+        }
+    }
+
+    &__navbar-link.nav-link {
+        font-size: v.$fs-rg;
+        color: v.$light;
+
+        &:hover {
+            color: v.$light;
+        }
+    }
+
+    &__navbar-toggler {
+        font-size: v.$fs-rg;
+        color: v.$light;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include m.desktop {
+            display: none;
+        }
+    }
+
+    &__navbar-menu {
+        display: none;
+        
+        &.active {
+            display: block;
+        }
+    }
+
+    &__navbar-dropdown.dropdown-menu {
+        background-color: #7BA8CB;
+
+        transform: translate(-80px, 40px) !important;
+        -webkit-transform: translate(-80px, 40px) !important;
+        -moz-transform: translate(-80px, 40px) !important;
+        -ms-transform: translate(-80px, 40px) !important;
+        -o-transform: translate(-80px, 40px) !important;
+
+        @include m.desktop {
+            transform: translate(-70px, 46px) !important;
+            -webkit-transform: translate(-70px, 46px) !important;
+            -moz-transform: translate(-70px, 46px) !important;
+            -ms-transform: translate(-70px, 46px) !important;
+            -o-transform: translate(-70px, 46px) !important;
+        }   
+    }
+
+    &__navbar-dropdown-item {
+        font-size: v.$fs-rg;
+        color: v.$light;
+
+        &:hover {
+            background-color: #96b9d4;
+            color: v.$light;
+        }
+    }
+}

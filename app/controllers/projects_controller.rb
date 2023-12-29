@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
       @projects = @q.result(distinct: true)
     end
   
-    @projects = @projects.distinct.paginate(page: params[:page], per_page: 7)
+    @projects = @projects.distinct.paginate(page: params[:page], per_page: 7)    
   end   
 
   # GET /projects/1 or /projects/1.json

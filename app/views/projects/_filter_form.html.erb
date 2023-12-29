@@ -1,25 +1,29 @@
 <%= search_form_for @q do |f| %>
-    <div class="field">
-        <%= f.label :name_cont, "Nombre" %>
-        <%= f.text_field :name_cont, class: "form-control" %>
+    <div class="projects__filters-form">
+        <div class="projects__filters-field">
+            <%= f.label :name_cont, "Nombre", class: "projects__filters-label" %>
+            <%= f.text_field :name_cont, class: "form-control projects__filters-input", placeholder: "Nombre del proyecto" %>
+        </div>
+        
+        <div class="projects__filters-field">
+            <%= f.label :preAcceptanceCode_cont, "Código previo", class: "projects__filters-label" %>
+            <%= f.text_field :preAcceptanceCode_cont, class: "form-control projects__filters-input", placeholder: "Código previo" %>
+        </div>
+        
+        <div class="projects__filters-field">
+            <%= f.label :finalCode_cont, "Código final", class: "projects__filters-label"  %>
+            <%= f.text_field :finalCode_cont, class: "form-control projects__filters-input", placeholder: "Código final" %>
+        </div>
+        
+        <div class="projects__filters-field">
+            <%= f.label :project_investigators_id_eq, "Investigador", class: "projects__filters-label" %>
+            <%= f.collection_select :project_investigators_id_eq, Individual.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select projects__filters-input" } %>
+        </div>
     </div>
 
-    <div class="field">
-        <%= f.label :preAcceptanceCode_cont, "Código previo" %>
-        <%= f.text_field :preAcceptanceCode_cont, class: "form-control" %>
-    </div>
-
-    <div class="field">
-        <%= f.label :finalCode_cont, "Código final" %>
-        <%= f.text_field :finalCode_cont, class: "form-control" %>
-    </div>
-
-    <div class="field">
-        <%= f.label :project_investigators_id_eq, "Investigador" %>
-        <%= f.collection_select :project_investigators_id_eq, Individual.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select" } %>
-    </div>
-
-    <div class="action mt-3 text-end">
-        <%= f.submit "Buscar", class: "btn btn-secondary" %>
+    <div class="action text-end">
+        <%= f.submit class: "btn__secondary px-3 py-2" do %>
+            <%# Icono Buscar %> Buscar
+        <% end %>
     </div>
 <% end %>

@@ -1,0 +1,26 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.flex-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 4rem;
+}
+
+.tablet-display {
+    display: none;
+
+    @include m.tablet {
+        display: inline-block;
+    }
+}
+
+.desktop-display {
+    display: none;
+
+    @include m.desktop {
+        display: inline-block;
+    }
+}

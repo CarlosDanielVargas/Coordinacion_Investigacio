@@ -1,0 +1,139 @@
+<% if current_user %>
+    <header>
+        <div class="header">
+            <div class="header__content container">
+                <div class="header__logos">
+                    <%= image_tag('combined_logo.svg', alt: 'Logo UCR-SO-CI', class: 'header__logo') %>
+                </div>
+
+                <div class="header__actions">
+                    <%= button_to "CERRAR SESIÓN", destroy_user_session_path, method: :delete, form: { data: { 'turbo-confirm': '¿Está seguro(a) que desea cerrar sesión?' } }, class: "header__button btn__secondary" %>
+                </div>
+            </div>
+        </div>
+
+        <div class="header__navbar">
+            <div class="header__navbar-content container">
+                <div class="navbar-expand-lg">
+                    <%# MOBILE NAVBAR TOGGLER %>
+                    <div class="header__navbar-toggler">
+                        <a href="<%= edit_user_registration_path %>" class="navbar-brand navbar__toggler" id="logo" rel="prev">
+                            <i class="bi bi-person"></i>&nbsp;<%= current_user.name %>
+                        </a>
+
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <%= image_tag('menu.svg', alt: "menu", id: "menu-close", class: "header__navbar-menu active", width: "30px") %>
+                            <%= image_tag('close-menu.svg', alt: "menu", id: "menu-open", class: "header__navbar-menu", width: "20px") %>
+                        </button>
+                    </div>
+                    
+                    <%# DESKTOP NAVBAR %>
+                    <div class="header__navbar-collapse navbar__collapse collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="header__navbar-links navbar-nav">
+                            <%# HOME %>
+                            <li class="header__navbar-item nav-item">
+                                <%= link_to "Inicio", root_path, class:"header__navbar-link nav-link" %>
+                            </li>
+
+                            <span class="header__divider" style="color: white;">|</span>
+
+                            <%# PROJECTS %>
+                            <li class="header__navbar-item nav-item dropdown">
+                                <a href="#" class="header__navbar-link nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Proyectos
+                                </a>
+
+                                <ul class="header__navbar-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <%= link_to projects_path, class:"header__navbar-dropdown-item dropdown-item" do %>
+                                            <i class="bi bi-journal"></i>&nbsp;
+                                            Lista de proyectos
+                                        <% end %>
+                                    </li>
+                                    <li>
+                                        <%= link_to new_project_path, class:"header__navbar-dropdown-item dropdown-item" do %>
+                                            <i class="bi bi-journal-plus"></i>&nbsp;
+                                            Agregar nuevo proyecto
+                                        <% end %>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <span class="header__divider" style="color: white;">|</span>
+
+                            <%# INDIVIDUALS %>
+                            <li class="header__navbar-item nav-item dropdown">
+                                <a href="#" class="header__navbar-link nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Investigadores
+                                </a>
+
+                                <ul class="header__navbar-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <%= link_to individuals_path, class:"header__navbar-dropdown-item dropdown-item" do %>
+                                            <i class="bi bi-person"></i>&nbsp;
+                                            Lista de investigadores
+                                        <% end %>
+                                    </li>
+                                    <li>
+                                        <%= link_to new_individual_path, class:"header__navbar-dropdown-item dropdown-item" do %>
+                                            <i class="bi bi-person-plus"></i>&nbsp;
+                                            Agregar nuevo investigador
+                                        <% end %>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <span class="header__divider" style="color: white;">|</span>
+
+                            <%# MINUTES %>
+                            <li class="header__navbar-item nav-item dropdown">
+                                <a href="#" class="header__navbar-link nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Actas
+                                </a>
+
+                                <ul class="header__navbar-dropdown dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <%= link_to minutes_path, class:"header__navbar-dropdown-item dropdown-item" do %>
+                                            <i class="bi bi-person"></i>&nbsp;
+                                            Lista de actas
+                                        <% end %>
+                                    </li>
+                                    <li>
+                                        <%= link_to new_minute_path, class:"header__navbar-dropdown-item dropdown-item" do %>
+                                            <i class="bi bi-person-plus"></i>&nbsp;
+                                            Agregar nueva acta
+                                        <% end %>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <span class="header__divider" style="color: white;">|</span>
+
+                            <%# USER %>
+                            <li class="header__navbar-item nav-item">
+                                <%= link_to "Cuenta", edit_user_registration_path, class:"header__navbar-link nav-link" %>
+                            </li>
+
+                            <%# LOGOUT MOBILE ONLY %>
+                            <li class="header__navbar-item nav-item">
+                                <%= button_to "CERRAR SESIÓN", destroy_user_session_path, method: :delete, form: { data: { 'turbo-confirm': '¿Está seguro(a) que desea cerrar sesión?' } }, class: "header__navbar-link header__navbar-link--logout btn__secondary" %>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        document.querySelector('#menu-close').addEventListener('click', () => {
+            document.querySelector('#menu-close').classList.remove('active');
+            document.querySelector('#menu-open').classList.add('active');
+        });
+
+        document.querySelector('#menu-open').addEventListener('click', () => {
+            document.querySelector('#menu-open').classList.remove('active');
+            document.querySelector('#menu-close').classList.add('active');
+        });
+    </script>
+<% end %>

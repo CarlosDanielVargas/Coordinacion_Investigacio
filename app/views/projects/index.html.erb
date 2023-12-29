@@ -1,22 +1,79 @@
-<div class="container">
-  <div class="row mt-4 mb-4">
-    <div class="col-md-12">
-      <h1 class="text-center">Proyectos</h1>
-    </div>
+<main class="container projects">
+
+  <div class="projects__header">
+    <h1 class="projects__title">LISTADO DE PROYECTOS</h1>
+
+    <%= link_to new_project_path, class:"btn__primary" do %>
+        <i class="bi bi-plus-square"></i>&nbsp;
+        Agregar proyecto
+    <% end %>
   </div>
 
-  <div class="mt-4 mb-4">
-    <div id="filter-form">
+  <section class="projects__filters">
+    <div class="projects__section-header projects__section-header--filters">
+      <h3 class="projects__section-title"><i class="bi bi-filter"></i>&nbsp;FILTROS</h3>
+      <span id="toggle"><i class="bi bi-caret-up-fill"></i></span>
+    </div>
+
+    <div class="projects__filters-body">
       <%= render 'filter_form' %>
     </div>
-  </div>
+  </section>
 
-
-  <div class="row mt-4 mb-4">
-    <div id="investigators">
-      <%= render 'project_table', projects: @projects %>
+  <section class="projects__body">
+    <div class="projects__section-header">
+      <h3 class="projects__section-title"><i class="bi bi-list-ul"></i>&nbsp;PROYECTOS</h3>
     </div>
-  </div>
-</div>
 
-<%= link_to "New project", new_project_path %>
+    <table class="projects__table table">
+      <thead>
+        <tr>
+          <th class="">DESCRIPCIÓN</th>
+          <th class="tablet-display">INVESTIGADORES</th>
+          <th>ACCIONES</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if @projects.empty? %>
+          <tr>
+            <td class="text-muted fst-italic text-center"><i class="bi bi-info-circle"></i>&nbsp;&nbsp;No hay proyectos para mostrar...</td>
+          </tr>
+        <% else %>
+          <% @projects.each do |project| %>
+            <tr>
+              <td class="project__description">
+                <p class="project__codes">
+                  <%= project.preAcceptanceCode %> /
+                  <span class="project__final-code"><%= project.finalCode == "" ? "--" : project.finalCode %></span>
+                </p>
+
+                <p class="project__name">
+                  <%= project.name %>
+                </p>
+              </td>
+
+              <td class="project__investigators tablet-display">
+                <p>NO SIRVE</p>
+              </td>
+
+              <td class="project__actions">
+                <%= link_to edit_project_path(project), class: "btn btn-sm btn-outline-primary" do %>
+                  <i class="bi bi-eye"></i><span class="desktop-display">&nbsp;Ver detalles</span>
+                <% end %>
+                <%= link_to project, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Está seguro(a) que desea eliminar este proyecto?' }, class: 'btn btn-sm btn-outline-danger' do %>
+                  <i class="bi bi-trash3"></i><span class="desktop-display">&nbsp;Eliminar</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="projects__pagination">
+      <p>Pagina 1 de 4 (20 resultados)</p>
+      <%= will_paginate @projects %>
+    </div>
+  </section>
+</main>

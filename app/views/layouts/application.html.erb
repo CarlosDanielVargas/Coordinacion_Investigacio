@@ -6,14 +6,21 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= favicon_link_tag asset_path('ucr-favicon.ico') %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "jquery" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
-    <%= render "shared/navigation" %>
-    <%= render "/shared/devise_notifications" %>
-    <%= yield %>
+    <div class="flex-wrapper">
+      <div class="wapper-content">
+        <%= render "shared/navbar" %>
+        <%= render "/shared/devise_notifications" %>
+        <%= yield %>
+      </div>
+      <%= render "shared/footer" %>
+    </div>
   </body>
 </html>
