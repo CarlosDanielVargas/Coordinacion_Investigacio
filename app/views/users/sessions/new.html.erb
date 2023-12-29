@@ -14,7 +14,7 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "login__form") do |f| %>
         <div class="login__form-field">
           <%= f.label :email, class: "login__form-label fw-bold" %>
-          <%= f.text_field :email, class: "login__form-input login__form-input--email form-control", placeholder: "Correo electrónico", autocomplete: "off" %>
+          <%= f.text_field :email, class: "login__form-input login__form-input--email form-control", placeholder: "Correo electrónico" %>
         </div>
 
         <div class="login__form-field">
