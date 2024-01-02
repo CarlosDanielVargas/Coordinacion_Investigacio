@@ -25,51 +25,54 @@
       <h3 class="projects__section-title"><i class="bi bi-list-ul"></i>&nbsp;PROYECTOS</h3>
     </div>
 
-    <table class="projects__table table">
-      <thead>
-        <tr>
-          <th class="">DESCRIPCIÓN</th>
-          <th class="tablet-display">INVESTIGADORES</th>
-          <th>ACCIONES</th>
-        </tr>
-      </thead>
+    <div class="table">
+      <div class="table__header">
+          <div class="table__row">
+            <p class="table__head">DESCRIPCIÓN</p>
+            <p class="table__head tablet-display">INVESTIGADORES</p>
+            <p class="table__head">ACCIONES</p>
+          </div>
+      </div>
 
-      <tbody>
-        <% if @projects.empty? %>
-          <tr>
-            <td class="text-muted fst-italic text-center"><i class="bi bi-info-circle"></i>&nbsp;&nbsp;No hay proyectos para mostrar...</td>
-          </tr>
-        <% else %>
-          <% @projects.each do |project| %>
-            <tr>
-              <td class="project__description">
-                <p class="project__codes">
-                  <%= project.preAcceptanceCode %> /
-                  <span class="project__final-code"><%= project.finalCode == "" ? "--" : project.finalCode %></span>
+      <div class="table__body">
+        <% @projects.each do |project| %>
+          <div class="table__row">
+            <div class="table__data project__description">
+              <p class="project__codes">
+                <%= project.preAcceptanceCode %> /
+                <span class="project__final-code"><%= project.finalCode == "" ? "--" : project.finalCode %></span>
+              </p>
+  
+              <p class="project__name">
+                <%= project.name %>
+              </p>
+            </div>
+
+            <div class="table__data tablet-display project__investigators">
+              <p class="project__principal-investigator">
+                <%= project.principal_investigator %>
+              </p>
+              <% project.associated_investigators.each do |i| %>
+                <p class="project__associated-investigators ">
+                  <%= i %>
                 </p>
+              <% end %>
+            </div>
 
-                <p class="project__name">
-                  <%= project.name %>
-                </p>
-              </td>
-
-              <td class="project__investigators tablet-display">
-                <p>NO SIRVE</p>
-              </td>
-
-              <td class="project__actions">
-                <%= link_to edit_project_path(project), class: "btn btn-sm btn-outline-primary" do %>
-                  <i class="bi bi-eye"></i><span class="desktop-display">&nbsp;Ver detalles</span>
+            <div class="table__data">
+              <div class="project__actions">
+                <%= link_to edit_project_path(project), class: "table__button-primary" do %>
+                  <i class="bi bi-eye"></i>&nbsp;Ver detalles
                 <% end %>
-                <%= link_to project, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Está seguro(a) que desea eliminar este proyecto?' }, class: 'btn btn-sm btn-outline-danger' do %>
-                  <i class="bi bi-trash3"></i><span class="desktop-display">&nbsp;Eliminar</span>
+                <%= link_to project, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Está seguro(a) que desea eliminar este proyecto?' }, class: "table__button-danger" do %>
+                  <i class="bi bi-trash3"></i>&nbsp;Eliminar
                 <% end %>
-              </td>
-            </tr>
-          <% end %>
+              </div>
+            </div>
+          </div>
         <% end %>
-      </tbody>
-    </table>
+      </div>
+    </div>
 
     <div class="projects__pagination">
       <p>Pagina 1 de 4 (20 resultados)</p>

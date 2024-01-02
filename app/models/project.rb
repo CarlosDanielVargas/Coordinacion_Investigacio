@@ -27,6 +27,12 @@ class Project < ApplicationRecord
     inv = Individual.find_by(id: inv.individual_id)
   end
 
+  def associated_investigators
+    return "--" if self.project_investigators.empty?
+    inv = self.project_investigators.where(role: "co_investigator")
+    inv = inv.map { |i| Individual.find_by(id: i.individual_id) }
+  end
+
   def to_s
     "#{self.finalCode}  -  #{self.name}"
   end

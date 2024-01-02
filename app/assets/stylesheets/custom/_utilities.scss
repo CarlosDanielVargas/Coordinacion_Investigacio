@@ -10,17 +10,87 @@
 }
 
 .tablet-display {
-    display: none;
+    display: none !important;
 
     @include m.tablet {
-        display: inline-block;
+        display: inline-block !important;
     }
 }
 
 .desktop-display {
-    display: none;
+    display: none !important;
 
     @include m.desktop {
-        display: inline-block;
+        display: inline-block !important;
+    }
+}
+
+.table {
+    width: 100%;
+    border: 1px solid v.$primary;
+    border-radius: v.$border-radius-sm;
+    -webkit-border-radius: v.$border-radius-sm;
+    -moz-border-radius: v.$border-radius-sm;
+    -ms-border-radius: v.$border-radius-sm;
+    -o-border-radius: v.$border-radius-sm;
+
+    & > :not(caption) > * > * {
+        padding: .5rem;
+        @include m.tablet {
+            padding: 1rem;
+        }
+    }
+
+    &__header {
+        background-color: v.$primary;
+        color: v.$light;
+        
+        &__row.table__head {
+            padding: .2rem;
+        }
+    }
+
+    &__head {
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        margin: 0;
+
+        @include m.tablet {
+            text-align: start;
+        }
+    }
+
+    &__row {
+        border-bottom: 1px solid v.$primary;
+        @include m.grid(2, 2rem);
+
+        @include m.tablet {
+            @include m.grid(3, 2rem);
+        }
+
+        &:last-child {
+            border: none;
+        }
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__button-primary {
+        @include m.button(v.$primary-light, v.$light);
+    }
+
+    &__button-danger {
+        @include m.button(v.$danger, v.$light);
+    }
+
+    &__button-primary,
+    &__button-danger {
+        font-weight: normal;
+        font-size: 16px;
     }
 }
