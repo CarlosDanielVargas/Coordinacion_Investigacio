@@ -39,8 +39,8 @@
           <div class="table__row">
             <div class="table__data project__description">
               <p class="project__codes">
-                <%= project.preAcceptanceCode %> /
-                <span class="project__final-code"><%= project.finalCode == "" ? "--" : project.finalCode %></span>
+                <span data-toggle="tooltip" data-placement="top" title="Código previo"><%= project.preAcceptanceCode %></span> /
+                <span class="project__final-code" data-toggle="tooltip" data-placement="top" title="Código final"><%= project.finalCode == "" ? "--" : project.finalCode %></span>
               </p>
   
               <p class="project__name">
@@ -49,7 +49,7 @@
             </div>
 
             <div class="table__data tablet-display project__investigators">
-              <p class="project__principal-investigator">
+              <p class="project__principal-investigator" data-toggle="tooltip" data-placement="top" title="Investigador principal">
                 <%= project.principal_investigator %>
               </p>
               <% project.associated_investigators.each do |i| %>
