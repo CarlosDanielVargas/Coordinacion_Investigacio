@@ -14,7 +14,13 @@
 
     @include m.tablet {
         display: inline-block !important;
+
+        &--td {
+            display: flex !important;
+        }
     }
+
+    
 }
 
 .desktop-display {
@@ -34,6 +40,11 @@
 
 div[class$="__filters-body"] {
     display: none;
+    margin-top: .7rem;
+}
+
+#clear-filters-button {
+    margin-bottom: 8px;
 }
 
 #clear-filters-button:hover {
