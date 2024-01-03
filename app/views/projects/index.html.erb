@@ -85,7 +85,7 @@
     </div>
 
     <div class="projects__pagination">
-      <p>Pagina 1 de 4 (20 resultados)</p>
+      <p>Página <%= @projects.current_page %> de <%= @projects.total_pages %> (<%= @projects.total_entries %> resultado<%= "s" if @projects.total_entries != 1 %>)</p>
       <%= will_paginate @projects %>
     </div>
   </section>

@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
     @q = Project.ransack(params[:q])
   
     if params[:q].nil?
-      @projects = Project.all.paginate(page: params[:page], per_page: 7)
+      @projects = Project.all.paginate(page: params[:page], per_page: 5)
       return
     end
   
