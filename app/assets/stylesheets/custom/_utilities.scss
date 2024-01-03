@@ -25,6 +25,21 @@
     }
 }
 
+.filters-toggle {
+    &:hover {
+        color: v.$grey;
+        cursor: pointer;
+    }
+}
+
+div[class$="__filters-body"] {
+    display: none;
+}
+
+#clear-filters-button:hover {
+    cursor: pointer;
+}
+
 .table {
     width: 100%;
     border: 1px solid v.$primary;
@@ -92,5 +107,13 @@
     &__button-danger {
         font-weight: normal;
         font-size: 16px;
+    }
+
+    &__link {
+        color: v.$primary;
+
+        &:hover {
+            color: darken(v.$primary-light, 10);
+        }
     }
 }

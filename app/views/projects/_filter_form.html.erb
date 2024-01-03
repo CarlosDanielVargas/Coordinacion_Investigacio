@@ -16,15 +16,15 @@
         </div>
         
         <div class="projects__filters-field">
-            <%= f.label :project_investigators_id_eq, "Investigador", class: "projects__filters-label" %>
+            <%= f.label :project_investigators_id_eq, "Investigador(a)", class: "projects__filters-label" %>
             <%= f.collection_select :project_investigators_id_eq, Individual.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select projects__filters-input" } %>
         </div>
     </div>
 
     <div class="action text-end">
-        <%= f.submit class: "btn__secondary px-3 py-2" do %>
-            <%# BOTON DE BUSCAR %>
+        <button type="submit" class="btn__secondary px-3 py-2">
+            <i class="bi bi-search me-1"></i>
             Buscar
-        <% end %>
+        </button>
     </div>
 <% end %>
