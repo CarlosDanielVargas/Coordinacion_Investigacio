@@ -1,29 +1,57 @@
-<table class="table table-hover text-center">
-  <thead>
-  <tr>
-    <th>Código previo</th>
-    <th>Código final</th>
-    <th>Nombre</th>
-    <th>Investigador Principal</th>
-    <th>Acciones</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @projects.each do |project| %>
-    <tr>
-      <td><%= project.preAcceptanceCode %></td>
-      <td><%= project.finalCode == "" ? "--" : project.finalCode %></td>
-      <td><%= project.name %></td>
-      <td><%= project.principal_investigator %></td>
-      <td>
-        <div class="btn-group gap-2">
-          <%= link_to "Ver detalles", edit_project_path(project), class: "btn btn-sm btn-outline-primary" %>
-          <%= link_to "Eliminar", project, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Estás seguro?' }, class: 'btn btn-sm btn-outline-danger' %>
-        </div>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="table">
+  <div class="table__header">
+      <div class="table__row">
+        <p class="table__head">DESCRIPCIÓN</p>
+        <p class="table__head tablet-display">INVESTIGADORES</p>
+        <p class="table__head">ACCIONES</p>
+      </div>
+  </div>
 
-<%= will_paginate @projects %>
+  <div class="table__body">
+    <% @projects.each do |project| %>
+      <div class="table__row">
+        <div class="table__data project__description">
+          <p class="project__codes">
+            <span data-toggle="tooltip" data-placement="top" title="Código previo"><%= project.preAcceptanceCode %></span> /
+            <span class="project__final-code" data-toggle="tooltip" data-placement="top" title="Código final"><%= project.finalCode == "" ? "--" : project.finalCode %></span>
+          </p>
+
+          <p class="project__name">
+            <%= project.name %>
+          </p>
+        </div>
+
+        <div class="table__data tablet-display tablet-display--td project__investigators">
+          <p class="project__principal-investigator" data-toggle="tooltip" data-placement="top" title="Investigador principal">
+            <%= project.principal_investigator %>
+          </p>
+          <% if project.associated_investigators.size <= 2 %>
+            <% project.associated_investigators.each do |i| %>
+              <p class="project__associated-investigators ">
+                <%= i %>
+              </p>
+            <% end %>
+          <% else %>
+            <p><%= project.associated_investigators[0] %></p>
+            <p><%= project.associated_investigators[1] %></p>
+            <%= link_to edit_project_path(project), class: "table__link" do %>
+              <% @temp = project.associated_investigators.size - 2 %>
+              +<%= @temp %> <%= @temp > 1 ? "investigadores(as)" : "investigador(a)"%>...
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="table__data">
+          <div class="project__actions">
+            <%= link_to edit_project_path(project), class: "table__button-primary" do %>
+              <i class="bi bi-eye"></i>&nbsp;<span class="tablet-display">Ver detalles</span>
+            <% end %>
+            <%= link_to project, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Está seguro(a) que desea eliminar este proyecto?' }, class: "table__button-danger" do %>
+              <i class="bi bi-trash3"></i>&nbsp;<span class="tablet-display">Eliminar</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

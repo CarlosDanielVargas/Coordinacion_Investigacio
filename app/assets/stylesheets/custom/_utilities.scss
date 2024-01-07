@@ -19,8 +19,6 @@
             display: flex !important;
         }
     }
-
-    
 }
 
 .desktop-display {
@@ -28,6 +26,30 @@
 
     @include m.desktop {
         display: inline-block !important;
+
+        &--td {
+            display: flex !important;
+        }
+    }
+}
+
+.desktop-xl-display {
+    display: none;
+
+    @include m.desktop-xl {
+        display: inline-block;
+    } 
+} 
+
+.desktop-only { 
+    display: none;
+
+    @include m.desktop {
+        display: inline-block;
+    } 
+
+    @include m.desktop-xl {
+        display: none;
     }
 }
 
@@ -36,6 +58,10 @@
         color: v.$grey;
         cursor: pointer;
     }
+}
+
+.secondary-color {
+    color: v.$secondary;
 }
 
 div[class$="__filters-body"] {
@@ -49,6 +75,34 @@ div[class$="__filters-body"] {
 
 #clear-filters-button:hover {
     cursor: pointer;
+}
+
+.grid-2 {
+    @include m.grid(2, 1rem);
+
+    @include m.tablet {
+        @include m.grid(2, 2rem);
+    }
+}
+
+.grid-3 {
+    @include m.grid(3, 1rem);
+
+    @include m.tablet {
+        @include m.grid(3, 2rem);
+    }
+}
+
+.grid-4 {
+    @include m.tablet {
+        @include m.grid(4, 2rem);
+    }
+
+    &--desktop {
+        @include m.desktop {
+            @include m.grid(4, 2rem);
+        }
+    }
 }
 
 .table {
@@ -118,6 +172,11 @@ div[class$="__filters-body"] {
     &__button-danger {
         font-weight: normal;
         font-size: 16px;
+        max-height: 45px;
+
+        @include m.desktop {
+            max-height: unset;
+        }
     }
 
     &__link {

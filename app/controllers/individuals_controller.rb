@@ -3,10 +3,10 @@ class IndividualsController < ApplicationController
 
   # GET /individuals or /individuals.json
   def index
-    byebug
+    #byebug
     @q = Individual.ransack(params[:q])
     @q.combinator = 'or'
-    @individuals = @q.result
+    @individuals = @q.result.paginate(page: params[:page], per_page: 5)
   end
 
   def search

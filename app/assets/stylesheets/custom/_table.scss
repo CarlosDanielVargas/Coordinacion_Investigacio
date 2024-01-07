@@ -1,0 +1,60 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.tb {
+    width: 100%;
+    border: 1px solid v.$primary;
+    border-radius: v.$border-radius-sm;
+    -webkit-border-radius: v.$border-radius-sm;
+    -moz-border-radius: v.$border-radius-sm;
+    -ms-border-radius: v.$border-radius-sm;
+    -o-border-radius: v.$border-radius-sm;
+
+    &__row {
+        border-bottom: 1px solid v.$primary;
+        &:last-of-type {
+            border: none;
+        }
+    }
+
+    &__header {
+        background-color: v.$primary;
+        color: v.$light;
+    }
+
+    .tb__head {
+        padding: .5rem;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        margin: 0;
+
+        @include m.tablet {
+            text-align: start;
+            padding: 1rem;
+        }
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: .5rem;
+        text-align: center;
+
+        @include m.tablet {
+            padding: .7rem 1rem;
+            text-align: start;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: .2rem;
+
+        @include m.tablet {
+            flex-direction: row;
+        }
+    }
+}
