@@ -1,0 +1,33 @@
+@use 'variables' as v;
+
+/* PAGINATION STYLES */
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 3px 6px;
+
+    color: red;
+
+    & span,
+    & a {
+        text-decoration: none;
+        color: v.$dark;
+        font-size: 16px;
+    }
+
+    & .current {
+        font-size: 16px;
+        font-style: normal;
+        color: v.$light;
+        padding: 3px 10px;
+        background-color: v.$secondary;
+        border-radius: v.$border-radius-sm;
+        -webkit-border-radius: v.$border-radius-sm;
+        -moz-border-radius: v.$border-radius-sm;
+        -ms-border-radius: v.$border-radius-sm;
+        -o-border-radius: v.$border-radius-sm;
+    }
+}

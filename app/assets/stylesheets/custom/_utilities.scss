@@ -87,20 +87,16 @@ div[class$="__filters-body"] {
 
 .grid-3 {
     @include m.grid(3, 1rem);
-
-    @include m.tablet {
-        @include m.grid(3, 2rem);
-    }
 }
 
 .grid-4 {
     @include m.tablet {
-        @include m.grid(4, 2rem);
+        @include m.grid(4, 1rem);
     }
 
     &--desktop {
         @include m.desktop {
-            @include m.grid(4, 2rem);
+            @include m.grid(4, 1rem);
         }
     }
 }

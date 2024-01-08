@@ -8,13 +8,13 @@
     <% end %>
   </div>
 
-  <section class="filters">
-    <a class="filters__header filters-toggle" data-action="click->filters#toggle">
-      <h3 class="filters__title"><i class="bi bi-filter"></i>&nbsp;FILTROS</h3>
+  <section class="main__filters">
+    <a class="main__filters-header filters-toggle" data-action="click->filters#toggle">
+      <h3 class="main__filters-title"><i class="bi bi-filter"></i>&nbsp;FILTROS</h3>
       <span id="toggle" data-name="individuals"><i class="bi bi-caret-down-fill"></i></span>
     </a>
 
-    <div class="filters__body">
+    <div class="main__filters-body">
       <%= render 'individual_filter' %>
     </div>
   </section>
