@@ -9,29 +9,33 @@
     </div>
     
     <div class="tb__body">
-        <% @individuals.each do |individual| %>
-            <div class="tb__row grid-3 grid-4--desktop">
-                <div class="tb__data">
-                    <p class="secondary-color"><span data-toggle="tooltip" data-placement="top" title="N° Identificación"><%= individual.id_card %></span></p>
-                    <p class="fw-bold fs-5"><%= individual.full_name %></p>
-                </div>
-                <div class="tb__data desktop-display desktop-display--td">
-                    <p><%= individual.email %></p>
-                </div>
-                <div class="tb__data">
-                    <p><%= individual.individual_type %></p>
-                </div>
-                <div class="tb__data">
-                    <div class="tb__actions">
-                        <%= link_to edit_individual_path(individual), class: "table__button-primary" do %>
-                            <i class="bi bi-eye"></i>&nbsp;<span class="desktop-only">Detalles</span><span class="desktop-xl-display">Ver detalles</span>
-                        <% end %>
-                        <%= link_to individual, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Está seguro(a) que desea eliminar a este(a) asociado(a)?' }, class: "table__button-danger" do %>
-                            <i class="bi bi-trash3"></i>&nbsp;<span class="desktop-display">Eliminar</span>
-                        <% end %>
+        <% if @individuals.empty? %>
+            <p class="tb__empty-message">No hay asociados(as) por mostrar...</p>
+        <% else %>
+            <% @individuals.each do |individual| %>
+                <div class="tb__row grid-3 grid-4--desktop">
+                    <div class="tb__data">
+                        <p class="secondary-color"><span data-toggle="tooltip" data-placement="top" title="N° Identificación"><%= individual.id_card %></span></p>
+                        <p class="fw-bold fs-5"><%= individual.full_name %></p>
+                    </div>
+                    <div class="tb__data desktop-display desktop-display--td">
+                        <p><%= individual.email %></p>
+                    </div>
+                    <div class="tb__data">
+                        <p><%= individual.individual_type %></p>
+                    </div>
+                    <div class="tb__data">
+                        <div class="tb__actions">
+                            <%= link_to edit_individual_path(individual), class: "table__button-primary" do %>
+                                <i class="bi bi-eye"></i>&nbsp;<span class="desktop-only">Detalles</span><span class="desktop-xl-display">Ver detalles</span>
+                            <% end %>
+                            <%= link_to individual, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Está seguro(a) que desea eliminar a este(a) asociado(a)?' }, class: "table__button-danger" do %>
+                                <i class="bi bi-trash3"></i>&nbsp;<span class="desktop-display">Eliminar</span>
+                            <% end %>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <% end %>
         <% end %>
     </div>
 </div>

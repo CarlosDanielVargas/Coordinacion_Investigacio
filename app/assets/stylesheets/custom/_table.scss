@@ -10,6 +10,14 @@
     -ms-border-radius: v.$border-radius-sm;
     -o-border-radius: v.$border-radius-sm;
 
+    &__empty-message {
+        font-style: italic;
+        width: 100%;
+        padding: 1rem;
+        color: v.$grey;
+        text-align: center;
+    }
+
     &__row {
         border-bottom: 1px solid v.$primary;
         &:last-of-type {

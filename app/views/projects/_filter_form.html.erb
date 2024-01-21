@@ -1,30 +1,30 @@
 <%= search_form_for @q do |f| %>
-    <div class="projects__filters-form">
-        <div class="projects__filters-field">
-            <%= f.label :name_cont, "Nombre", class: "projects__filters-label" %>
-            <%= f.text_field :name_cont, class: "form-control projects__filters-input", placeholder: "Nombre del proyecto" %>
-        </div>
-        
-        <div class="projects__filters-field">
-            <%= f.label :preAcceptanceCode_cont, "Código previo", class: "projects__filters-label" %>
-            <%= f.text_field :preAcceptanceCode_cont, class: "form-control projects__filters-input", placeholder: "Código previo" %>
-        </div>
-        
-        <div class="projects__filters-field">
-            <%= f.label :finalCode_cont, "Código final", class: "projects__filters-label"  %>
-            <%= f.text_field :finalCode_cont, class: "form-control projects__filters-input", placeholder: "Código final" %>
-        </div>
-        
-        <div class="projects__filters-field">
-            <%= f.label :project_investigators_id_eq, "Investigador(a)", class: "projects__filters-label" %>
-            <%= f.collection_select :project_investigators_id_eq, Individual.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select projects__filters-input" } %>
-        </div>
+  <div class="main__filters-form main__filters-grid--4">
+    <div class="main__filters-field">
+        <%= f.label :name_cont, "Nombre", class: "main__filters-label" %>
+        <%= f.text_field :name_cont, class: "form-control main__filters-input", placeholder: "Nombre del proyecto" %>
     </div>
+    
+    <div class="main__filters-field">
+        <%= f.label :preAcceptanceCode_cont, "Código previo", class: "main__filters-label" %>
+        <%= f.text_field :preAcceptanceCode_cont, class: "form-control main__filters-input", placeholder: "Código previo" %>
+    </div>
+    
+    <div class="main__filters-field">
+        <%= f.label :finalCode_cont, "Código final", class: "main__filters-label"  %>
+        <%= f.text_field :finalCode_cont, class: "form-control main__filters-input", placeholder: "Código final" %>
+    </div>
+    
+    <div class="main__filters-field">
+        <%= f.label :project_investigators_id_eq, "Investigador(a)", class: "main__filters-label" %>
+        <%= f.collection_select :project_investigators_id_eq, Individual.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select main__filters-input" } %>
+    </div>
+  </div>
 
-    <div class="main__filters-action action text-end">
-        <button type="submit" class="btn__secondary px-3 py-2">
-            <i class="bi bi-search me-1"></i>
-            Buscar
-        </button>
-    </div>
+  <div class="action main__filters-action text-end">
+    <button type="submit" class="btn__secondary px-3 py-2">
+        <i class="bi bi-search me-1"></i>
+        Buscar
+    </button>
+  </div>
 <% end %>

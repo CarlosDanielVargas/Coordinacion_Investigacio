@@ -1,57 +1,61 @@
-<div class="table">
-  <div class="table__header">
-      <div class="table__row">
-        <p class="table__head">DESCRIPCIÓN</p>
-        <p class="table__head tablet-display">ASOCIADOS(AS)</p>
-        <p class="table__head">ACCIONES</p>
-      </div>
+<div class="tb">
+  <div class="tb__header">
+    <div class="tb__row grid-2 grid-3--desktop">
+        <p class="tb__head">DESCRIPCIÓN</p>
+        <p class="tb__head desktop-display">ASOCIADOS(AS)</p>
+        <p class="tb__head">ACCIONES</p>
+    </div>
   </div>
 
-  <div class="table__body">
-    <% @projects.each do |project| %>
-      <div class="table__row">
-        <div class="table__data project__description">
-          <p class="project__codes">
-            <span data-toggle="tooltip" data-placement="top" title="Código previo"><%= project.preAcceptanceCode %></span> /
-            <span class="project__final-code" data-toggle="tooltip" data-placement="top" title="Código final"><%= project.finalCode == "" ? "--" : project.finalCode %></span>
-          </p>
+  <div class="tb__body">
+    <% if @projects.empty? %>
+      <p class="tb__empty-message">No hay proyectos por mostrar...</p>
+    <% else %>
+      <% @projects.each do |project| %>
+        <div class="tb__row grid-2 grid-3--desktop">
+          <div class="tb__data">
+            <p class="project__codes">
+              <span data-toggle="tooltip" data-placement="top" title="Código previo"><%= project.preAcceptanceCode %></span> /
+              <span class="project__final-code" data-toggle="tooltip" data-placement="top" title="Código final"><%= project.finalCode == "" ? "--" : project.finalCode %></span>
+            </p>
 
-          <p class="project__name">
-            <%= project.name %>
-          </p>
-        </div>
+            <p class="project__name">
+              <%= project.name %>
+            </p>
+          </div>
 
-        <div class="table__data tablet-display tablet-display--td project__investigators">
-          <p class="project__principal-investigator" data-toggle="tooltip" data-placement="top" title="Investigador principal">
-            <%= project.principal_investigator %>
-          </p>
-          <% if project.associated_investigators.size <= 2 %>
-            <% project.associated_investigators.each do |i| %>
-              <p class="project__associated-investigators ">
-                <%= i %>
-              </p>
-            <% end %>
-          <% else %>
-            <p><%= project.associated_investigators[0] %></p>
-            <p><%= project.associated_investigators[1] %></p>
-            <%= link_to edit_project_path(project), class: "table__link" do %>
-              <% @temp = project.associated_investigators.size - 2 %>
-              +<%= @temp %> <%= @temp > 1 ? "investigadores(as)" : "investigador(a)"%>...
-            <% end %>
-          <% end %>
-        </div>
-
-        <div class="table__data">
-          <div class="project__actions">
-            <%= link_to edit_project_path(project), class: "table__button-primary" do %>
-              <i class="bi bi-eye"></i>&nbsp;<span class="tablet-display">Ver detalles</span>
-            <% end %>
-            <%= link_to project, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Está seguro(a) que desea eliminar este proyecto?' }, class: "table__button-danger" do %>
-              <i class="bi bi-trash3"></i>&nbsp;<span class="tablet-display">Eliminar</span>
+          <div class="tb__data desktop-display desktop-display--td">
+            <p class="project__principal-investigator" data-toggle="tooltip" data-placement="top" title="Investigador principal">
+              <%= project.principal_investigator %>
+            </p>
+            <% if project.associated_investigators.size <= 2 %>
+              <% project.associated_investigators.each do |i| %>
+                <p class="project__associated-investigators ">
+                  <%= i %>
+                </p>
+              <% end %>
+            <% else %>
+              <p><%= project.associated_investigators[0] %></p>
+              <p><%= project.associated_investigators[1] %></p>
+              <%= link_to edit_project_path(project), class: "table__link" do %>
+                <% @temp = project.associated_investigators.size - 2 %>
+                +<%= @temp %> <%= @temp > 1 ? "investigadores(as)" : "investigador(a)"%>...
+              <% end %>
             <% end %>
           </div>
+
+          <div class="tb__data">
+              <div class="tb__actions">
+                  <%= link_to edit_project_path(project), class: "table__button-primary" do %>
+                      <i class="bi bi-eye"></i>&nbsp;<span class="desktop-only">Detalles</span><span class="desktop-xl-display">Ver detalles</span>
+                  <% end %>
+                  <%= link_to project, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Está seguro(a) que desea eliminar este proyecto?' }, class: "table__button-danger" do %>
+                      <i class="bi bi-trash3"></i>&nbsp;<span class="desktop-display">Eliminar</span>
+                  <% end %>
+              </div>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -1,7 +1,6 @@
 <main class="container projects" data-controller="filters">
-
-  <div class="projects__header">
-    <h1 class="projects__title">LISTADO DE PROYECTOS</h1>
+  <div class="main__header">
+    <h1 class="main__title">LISTADO DE PROYECTOS</h1>
 
     <%= link_to new_project_path, class:"btn__primary" do %>
         <i class="bi bi-plus-square"></i>&nbsp;
@@ -9,28 +8,28 @@
     <% end %>
   </div>
 
-  <section class="projects__filters">
-    <a class="projects__section-header projects__section-header--filters filters-toggle" data-action="click->filters#toggle">
-      <h3 class="projects__section-title projects__section-title--filters"><i class="bi bi-filter"></i>&nbsp;FILTROS</h3>
+  <section class="main__filters">
+    <a class="main__filters-header filters-toggle" data-action="click->filters#toggle">
+      <h3 class="main__filters-title"><i class="bi bi-filter"></i>&nbsp;FILTROS</h3>
       <span id="toggle" data-name="projects"><i class="bi bi-caret-down-fill"></i></span>
     </a>
 
-    <div class="projects__filters-body">
+    <div class="main__filters-body">
       <%= render 'filter_form' %>
     </div>
   </section>
 
-  <section class="projects__body">
-    <div class="projects__section-header">
-      <h3 class="projects__section-title"><i class="bi bi-list-ul"></i>&nbsp;PROYECTOS</h3>
+  <section class="main__body">
+    <div class="main__body-header">
+      <h3 class="main__body-title"><i class="bi bi-list-ul"></i>&nbsp;PROYECTOS</h3>
       <a class="text-danger" id="clear-filters-button" style="display: none; text-decoration: none;" data-action="click->filters#clearFilters">Limpiar filtros &times;</a>
     </div>
 
     <%= render 'project_table' %>
 
-    <div class="projects__pagination">
-      <p>Página <%= @projects.current_page %> de <%= @projects.total_pages %> (<%= @projects.total_entries %> resultado<%= "s" if @projects.total_entries != 1 %>)</p>
-      <%= will_paginate @projects %>
+    <div class="main__pagination">
+      <%= render 'shared/pagination', object: @projects %>
+      <%= will_paginate @projects, inner_window: 1 %>
     </div>
   </section>
 </main>

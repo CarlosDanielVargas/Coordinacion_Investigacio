@@ -87,6 +87,12 @@ div[class$="__filters-body"] {
 
 .grid-3 {
     @include m.grid(3, 1rem);
+
+    &--desktop {
+        @include m.desktop {
+            @include m.grid(3, 1rem);
+        }
+    }
 }
 
 .grid-4 {
