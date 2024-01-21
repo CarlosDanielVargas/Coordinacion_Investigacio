@@ -65,4 +65,31 @@
             flex-direction: row;
         }
     }
+
+    &__button-primary {
+        @include m.button(v.$primary-light, v.$light);
+    }
+
+    &__button-danger {
+        @include m.button(v.$danger, v.$light);
+    }
+
+    &__button-primary,
+    &__button-danger {
+        font-weight: normal;
+        font-size: 16px;
+        max-height: 45px;
+
+        @include m.desktop {
+            max-height: unset;
+        }
+    }
+
+    &__link {
+        color: v.$primary;
+
+        &:hover {
+            color: darken(v.$primary-light, 10);
+        }
+    }
 }
