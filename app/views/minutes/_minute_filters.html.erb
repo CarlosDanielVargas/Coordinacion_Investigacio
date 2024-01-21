@@ -1,18 +1,25 @@
 <%= search_form_for @q do |f| %>
-  <div class="field">
-    <%= f.label :project_id_eq, "Proyectos" %>
-    <%= f.collection_select :project_id_eq, Project.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select" } %>
-  </div>
-  <div class="field">
-    <%= f.label :number_eq, "Nª Acta:" %>
-    <%= f.number_field :number_eq, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :investigator_id_eq, "Investigador" %>
-    <%= f.collection_select :investigator_id_eq, Individual.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select" } %>
+  <div class="main__filters-form main__filters-grid--3">
+    <div class="main__filters-field">
+        <%= f.label :project_id_eq, "Proyectos", class: "main__filters-label" %>
+        <%= f.collection_select :project_id_eq, Project.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select main__filters-input" } %>
+    </div>
+    
+    <div class="main__filters-field">
+        <%= f.label :number_eq, "N° Acta", class: "main__filters-label"  %>
+        <%= f.number_field :number_eq, class: "form-control main__filters-input", placeholder: "N° Acta" %>
+    </div>
+    
+    <div class="main__filters-field">
+        <%= f.label :investigator_id_eq, "Investigador(a)", class: "main__filters-label" %>
+        <%= f.collection_select :investigator_id_eq, Individual.all, :id, :to_s, { prompt: "- Seleccione una opción -" }, { class: "form-select main__filters-input" } %>
+    </div>
   </div>
 
-  <div class="action mt-3 text-end">
-    <%= f.submit "Buscar", class: "btn btn-secondary" %>
+  <div class="action main__filters-action text-end">
+    <button type="submit" class="btn__secondary px-3 py-2">
+        <i class="bi bi-search me-1"></i>
+        Buscar
+    </button>
   </div>
 <% end %>

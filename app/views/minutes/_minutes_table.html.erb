@@ -1,0 +1,43 @@
+<div class="tb">
+    <div class="tb__header">
+        <div class="tb__row grid-3 grid-4--desktop">
+            <p class="tb__head">N° ACTA</p>
+            <p class="tb__head">PROYECTOS</p>
+            <p class="tb__head desktop-display">ASOCIADOS(AS)</p>
+            <p class="tb__head">ACCIONES</p>
+        </div>
+    </div>
+
+    <div class="tb__body">
+        <% if @minutes.empty? %>
+            <p class="tb__empty-message">No hay actas por mostrar...</p>
+        <% else %>
+            <% @minutes.each do |minute| %>
+                <div class="tb__row grid-3 grid-4--desktop">
+                    <div class="tb__data">
+                        <p class="minute__number fw-bold">N° <%= minute.number %></p>
+                    </div>
+
+                    <div class="tb__data">
+                        <p class="minute__number">--</p>
+                    </div>
+
+                    <div class="tb__data desktop-display desktop-display--td">
+                        <p class="minute__number">--</p>
+                    </div>
+
+                    <div class="tb__data">
+                        <div class="tb__actions">
+                            <%= link_to edit_minute_path(minute), class: "tb__button-primary" do %>
+                                <i class="bi bi-eye"></i>&nbsp;<span class="desktop-only">Detalles</span><span class="desktop-xl-display">Ver detalles</span>
+                            <% end %>
+                            <%= link_to minute, method: :delete, data: { turbo_method: :delete, turbo_confirm: '¿Está seguro(a) que desea eliminar esta acta?' }, class: "tb__button-danger" do %>
+                                <i class="bi bi-trash3"></i>&nbsp;<span class="desktop-display">Eliminar</span>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>

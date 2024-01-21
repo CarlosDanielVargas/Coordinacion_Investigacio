@@ -33,6 +33,18 @@
     }
 }
 
+.desktop-lg-display {
+    display: none !important;
+
+    @include m.desktop-lg {
+        display: inline-block !important;
+
+        &--td {
+            display: flex !important;
+        }
+    }
+}
+
 .desktop-xl-display {
     display: none;
 
@@ -103,6 +115,18 @@ div[class$="__filters-body"] {
     &--desktop {
         @include m.desktop {
             @include m.grid(4, 1rem);
+        }
+    }
+}
+
+.grid-5 {
+    @include m.tablet {
+        @include m.grid(5, 1rem);
+    }
+
+    &--desktop-lg {
+        @include m.desktop-lg {
+            @include m.grid(5, 1rem);
         }
     }
 }

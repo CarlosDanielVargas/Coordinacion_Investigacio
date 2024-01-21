@@ -1,55 +1,35 @@
-<div class="container">
-  <p style="color: green"><%= notice %></p>
+<main class="container minutes" data-controller="filters">
+  <div class="main__header">
+    <h1 class="main__title">LISTADO DE ACTAS</h1>
 
-  <div class="row mt-4 mb-4">
-    <div class="col-md-12">
-      <h1 class="text-center">Actas</h1>
-    </div>
+    <%= link_to new_minute_path, class:"btn__primary" do %>
+        <i class="bi bi-plus-square"></i>&nbsp;
+        Agregar acta
+    <% end %>
   </div>
 
-  <div class="mt-4 mb-4">
-    <div id="filter-form">
+  <section class="main__filters">
+    <a class="main__filters-header filters-toggle" data-action="click->filters#toggle">
+      <h3 class="main__filters-title"><i class="bi bi-filter"></i>&nbsp;FILTROS</h3>
+      <span id="toggle" data-name="minutes"><i class="bi bi-caret-down-fill"></i></span>
+    </a>
+
+    <div class="main__filters-body">
       <%= render 'minute_filters' %>
     </div>
-  </div>
+  </section>
 
-  <div id="minutes">
-    <table class="table table-hover text-center">
-      <thead>
-      <tr>
-        <th>Fecha de creación</th>
-        <th>Nº Acta</th>
-        <th>Nº Proyecto</th>
-        <th>Proyecto</th>
-        <th>Investigadores</th>
-        <th>Acciones</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @minutes.each do |minute| %>
-        <% minute.projects.each do |project| %>
-          <tr>
-            <td><%= minute.creation_date.strftime("%d/%m/%y") %></td>
-            <td><%= minute.number %></td>
-            <td><%= project.finalCode %></td>
-            <td><%= project.name %></td>
-            <td>
-              <% project.individuals.each do |investigator| %>
-                <%= investigator.last_name %> <%= investigator.first_name %> <br>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to edit_minute_path(minute), class: "btn btn-primary" do %>
-                <i class="bi bi-pencil-fill"></i> Ver
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
+  <section class="main__body">
+    <div class="main__body-header">
+      <h3 class="main__body-title"><i class="bi bi-list-ul"></i>&nbsp;ACTAS</h3>
+      <a class="text-danger" id="clear-filters-button" style="display: none; text-decoration: none;" data-action="click->filters#clearFilters">Limpiar filtros &times;</a>
+    </div>
 
-  <%= link_to "New minute", new_minute_path %>
-</div>
+    <%= render 'minutes_table' %>
 
+    <div class="main__pagination">
+      <%= render 'shared/pagination', object: @minutes %>
+      <%= will_paginate @minutes, inner_window: 1 %>
+    </div>
+  </section>
+</main>
