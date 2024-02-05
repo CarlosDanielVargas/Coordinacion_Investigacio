@@ -44,7 +44,7 @@
         -o-border-radius: v.$border-radius-sm;
 
         @include m.tablet {
-            padding: 1.5rem 2rem;
+            padding: 1.5rem 3rem;
         } 
 
         &-header {

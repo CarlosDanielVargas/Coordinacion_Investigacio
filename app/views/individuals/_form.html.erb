@@ -1,62 +1,47 @@
-<div class="container p-5">
-  <%= form_with(model: individual) do |form| %>
-    <% if individual.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(individual.errors.count, "error") %> prohibited this individual from being saved:</h2>
-        <ul>
-          <% individual.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <div class="row mb-3 text-center">
-      <div class="col-2">
-        <%= form.label "Nombre", style: "display: block"%>
-      </div>
-      <div class="col-10">
-        <%= form.text_field :first_name, class: "form-control"%>
-      </div>
-    </div>
-    <div class="row mb-3 text-center">
-      <div class="col-2">
-        <%= form.label "Apellido", style: "display: block"%>
-      </div>
-      <div class="col-10">
-        <%= form.text_field :last_name, class: "form-control"%>
-      </div>
-    </div>
-    <div class="row mb-3 text-center">
-      <div class="col-2">
-        <%= form.label "Cédula", style: "display: block"%>
-      </div>
-      <div class="col-10">
-        <%= form.text_field :id_card, class: "form-control"%>
-      </div>
-    </div>
-    <div class="row mb-3 text-center">
-      <div class="col-2">
-        <%= form.label "Correo electrónico", style: "display: block"%>
-      </div>
-      <div class="col-10">
-        <%= form.text_field :email, class: "form-control"%>
-      </div>
-    </div>
-    <div class="row mb-3 text-center">
-      <div class="col-2">
-        <%= form.label "Tipo", style: "display: block"%>
-      </div>
-      <div class="col-10">
-        <%= form.select :individual_type, Individual.individual_types.keys.map { |key| [key.capitalize, key] }, class: "form-control" %>
-      </div>
-    </div>
-    <div class="row text-center">
-      <div class="col">
-        <%= button_tag( :class => "btn btn-primary") do %>
-          <i class="bi bi-check-lg"></i>
-          Guardar
+<%= form_with(model: individual, html: { class: 'form' }) do |form| %>
+  <% if individual.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(individual.errors.count, "error") %> prohibited this individual from being saved:</h2>
+      <ul>
+        <% individual.errors.each do |error| %>
+          <li><%= error.full_message %></li>
         <% end %>
-      </div>
+      </ul>
     </div>
   <% end %>
-</div>
+
+  <h3 class="main__body-subtitle my-rg"><i class="bi bi-person-fill"></i> DATOS DEL ASOCIADO(A)</h3>
+
+
+  <div class="grid-2">
+    <div class="form__field">
+      <%= form.label "Nombre", class: "form__label" %>
+      <%= form.text_field :first_name, class: "form-control form__input", placeholder: "Nombre del asociado(a)" %>
+    </div>
+
+    <div class="form__field">
+      <%= form.label "Apellido", class: "form__label" %>
+      <%= form.text_field :last_name, class: "form-control form__input", placeholder: "Apellido del asociado(a)" %>
+    </div>
+
+    <div class="form__field">
+      <%= form.label "Número de identificación", class: "form__label" %>
+      <%= form.text_field :id_card, class: "form-control form__input", placeholder: "Número de identificación" %>
+    </div>
+
+    <div class="form__field">
+      <%= form.label "Correo electrónico", class: "form__label" %>
+      <%= form.email_field :email, class: "form-control form__input", placeholder: "Correo electrónico" %>
+    </div>
+  </div>
+
+  <div class="form__field">
+      <%= form.label "Tipo de asociado(a)", class: "form__label" %>
+      <%= form.select :individual_type, options_for_select(Individual.individual_types.keys.map { |key| [key.capitalize, key] }), { prompt: "- Seleccione una opción -" }, class: "form-select main__filters-input" %>
+  </div>
+
+  <div class="form__actions">
+    <%= form.submit "Guardar", class: "btn__primary" %>
+    <%= link_to "Regresar", individuals_path, class:"btn__grey" %>
+  </div>
+<% end %>

@@ -8,3 +8,7 @@
 .btn__secondary {
     @include m.button(v.$secondary, v.$light);
 }
+
+.btn__grey {
+    @include m.button(v.$grey, v.$light);
+}

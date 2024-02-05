@@ -9,4 +9,15 @@
             margin-bottom: 1rem;
         }
     }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        @include m.tablet {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
 }

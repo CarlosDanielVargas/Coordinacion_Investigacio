@@ -1,12 +1,9 @@
-<div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
-  <div class="row mb-3 text-center">
-    <h1 class=>Nuevo investigador</h1>
+<main class="main container">
+  <div class="main__body">
+    <h1 class="main__title main__title--upsert">NUEVO(A) ASOCIADO(A)</h1>
+
+    <div class="main__form">
+      <%= render "form", individual: @individual %>
+    </div>
   </div>
-  <div class="row">
-    <%= render "form", individual: @individual %>
-  </div>
-</div>
-<br>
-<div>
-  <%= link_to "Back to individuals", individuals_path %>
-</div>
+</main>
