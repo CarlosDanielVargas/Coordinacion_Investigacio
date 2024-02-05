@@ -19,6 +19,16 @@
 
     &__title {
         color: v.$primary;
+
+        &--upsert {
+            text-align: center;
+            padding-bottom: .5rem;
+            border-bottom: 1px solid v.$primary;
+
+            @include m.tablet {
+                text-align: start;
+            }
+        }
     }
 
     &__filters,
@@ -44,7 +54,8 @@
             align-items: center;
         }
 
-        &-title {
+        &-subtitle {
+            color: v.$grey;
             font-size: 16px;
         }
     }

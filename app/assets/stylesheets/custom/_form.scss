@@ -1,0 +1,12 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.form {
+    &__field {
+        margin-bottom: .8rem;
+
+        @include m.tablet {
+            margin-bottom: 1rem;
+        }
+    }
+}

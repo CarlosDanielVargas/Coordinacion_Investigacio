@@ -90,15 +90,21 @@ div[class$="__filters-body"] {
 }
 
 .grid-2 {
-    @include m.grid(2, 1rem);
+    @include m.grid(1, 1rem);
 
     @include m.tablet {
-        @include m.grid(2, 2rem);
+        @include m.grid(2, 1rem);
     }
 }
 
 .grid-3 {
-    @include m.grid(3, 1rem);
+    @include m.grid(1, 1rem);
+
+    &--tablet {
+        @include m.tablet {
+            @include m.grid(3, 1rem);
+        }
+    }
 
     &--desktop {
         @include m.desktop {
@@ -131,58 +137,34 @@ div[class$="__filters-body"] {
     }
 }
 
-.table {
-    width: 100%;
-    border: 1px solid v.$primary;
-    border-radius: v.$border-radius-sm;
-    -webkit-border-radius: v.$border-radius-sm;
-    -moz-border-radius: v.$border-radius-sm;
-    -ms-border-radius: v.$border-radius-sm;
-    -o-border-radius: v.$border-radius-sm;
+.my-rg {
+    margin: 1rem 0;
+}
 
-    & > :not(caption) > * > * {
-        padding: .5rem;
-        @include m.tablet {
-            padding: 1rem;
-        }
-    }
+.fs-xs {
+    font-size: v.$fs-xs;
+}
 
-    &__header {
-        background-color: v.$primary;
-        color: v.$light;
-        
-        &__row.table__head {
-            padding: .2rem;
-        }
-    }
+.fs-sm {
+    font-size: v.$fs-sm;
+}
 
-    &__head {
-        font-weight: bold;
-        font-size: 16px;
-        text-align: center;
-        margin: 0;
+.fs-rg {
+    font-size: v.$fs-rg;
+}
 
-        @include m.tablet {
-            text-align: start;
-        }
-    }
+.fs-md {
+    font-size: v.$fs-md;
+}
 
-    &__row {
-        border-bottom: 1px solid v.$primary;
-        @include m.grid(2, 2rem);
+.fs-lg {
+    font-size: v.$fs-lg;
+}
 
-        @include m.tablet {
-            @include m.grid(3, 2rem);
-        }
+.fs-xl {
+    font-size: v.$fs-xl;
+}
 
-        &:last-child {
-            border: none;
-        }
-    }
-
-    &__data {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+.fs-xxl {
+    font-size: v.$fs-xxl;
 }
