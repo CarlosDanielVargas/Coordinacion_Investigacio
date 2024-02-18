@@ -61,8 +61,7 @@ class ProjectsController < ApplicationController
   end
 
   # PATCH/PUT /projects/1 or /projects/1.json
-  def updated
-    # TODO: Fix - Its not working ...
+  def update
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to projects_url, notice: "Project was successfully updated." }
