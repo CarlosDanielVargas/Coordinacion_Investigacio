@@ -34,7 +34,7 @@ class IndividualsController < ApplicationController
 
     respond_to do |format|
       if @individual.save
-        format.html { redirect_to individual_url(@individual), notice: "Individual was successfully created." }
+        format.html { redirect_to edit_individual_path(@individual), notice: "Individual was successfully created." }
         format.json { render :show, status: :created, location: @individual }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class IndividualsController < ApplicationController
   def update
     respond_to do |format|
       if @individual.update(investigator_params)
-        format.html { redirect_to individual_url(@individual), notice: "Individual was successfully updated." }
+        format.html { redirect_to edit_individual_path(@individual), notice: "Individual was successfully updated." }
         format.json { render :show, status: :ok, location: @individual }
       else
         format.html { render :edit, status: :unprocessable_entity }

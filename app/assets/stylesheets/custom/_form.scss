@@ -3,11 +3,11 @@
 
 .form {
     &__field {
-        margin-bottom: .8rem;
+        margin-bottom: .5rem;
+    }
 
-        @include m.tablet {
-            margin-bottom: 1rem;
-        }
+    &__label {
+        margin-bottom: .2rem;
     }
 
     &__actions {

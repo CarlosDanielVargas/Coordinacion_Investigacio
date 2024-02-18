@@ -38,6 +38,9 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @project = Project.find(params[:id])
+    @individuals = Individual.all
+    @project.individuals.build if @project.individuals.empty?
   end
 
   # POST /projects or /projects.json
@@ -58,7 +61,8 @@ class ProjectsController < ApplicationController
   end
 
   # PATCH/PUT /projects/1 or /projects/1.json
-  def update
+  def updated
+    # TODO: Fix - Its not working ...
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to projects_url, notice: "Project was successfully updated." }

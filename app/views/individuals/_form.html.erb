@@ -13,7 +13,7 @@
   <h3 class="main__body-subtitle my-rg"><i class="bi bi-person-fill"></i> DATOS DEL ASOCIADO(A)</h3>
 
 
-  <div class="grid-2">
+  <div class="grid-1 grid-2--tablet">
     <div class="form__field">
       <%= form.label "Nombre", class: "form__label" %>
       <%= form.text_field :first_name, class: "form-control form__input", placeholder: "Nombre del asociado(a)" %>
@@ -37,7 +37,7 @@
 
   <div class="form__field">
       <%= form.label "Tipo de asociado(a)", class: "form__label" %>
-      <%= form.select :individual_type, options_for_select(Individual.individual_types.keys.map { |key| [key.capitalize, key] }), { prompt: "- Seleccione una opción -" }, class: "form-select main__filters-input" %>
+      <%= form.select :individual_type, options_for_select(Individual.individual_types.keys.map { |key| [key.capitalize, key] }, @individual.individual_type), { include_blank: "- Seleccione una opción -" }, class: "form-select main__filters-input" %>
   </div>
 
   <div class="form__actions">

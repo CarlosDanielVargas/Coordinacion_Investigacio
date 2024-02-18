@@ -1,0 +1,35 @@
+<div class="tb">
+    <div class="tb__header">
+        <di class="tb__row grid-2 grid-3--tablet">
+            <p class="tb__head">NOMBRE <span class="tablet-display">COMPLETO</span></p>
+            <p class="tb__head tablet-display">N° IDENTIFICACIÓN</p>
+            <p class="tb__head">AGREGADO(A)</p>
+        </di>
+    </div>
+
+    <div class="tb__body">
+        <% if @individuals.empty? %>
+            <p class="tb__empty-message">No hay asociados(as) para mostrar. Por favor, agrega al menos un(a) asociado(a) antes de crear el proyecto.</p>
+        <% else %>
+            <% @individuals.each do |individual| %>
+                <% if individual != @project.principal_investigator %>
+                    <div class="tb__row grid-2 grid-3--tablet">
+                        <div class="tb__data">
+                            <p><%= individual.full_name %></p>
+                        </div>
+
+                        <div class="tb__data tablet-display">
+                            <p><%= individual.id_card %></p>
+                        </div>
+
+                        <div class="tb__data tb__data--start d-flex align-start">
+                            <%= f.fields_for :individuals, individual do |individual_subform| %>
+                                <%= individual_subform.check_box :id, { checked: @project.individuals.include?(individual) }, class: "form__input" %>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+    </div>
+</div>

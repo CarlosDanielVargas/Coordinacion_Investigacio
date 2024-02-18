@@ -1,33 +1,53 @@
-<div class="container p-5">
-  <%= form_with(model: project) do |form| %>
-    <% if project.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
-        <ul>
-          <% project.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <div class="row form-group">
-      <h5>Datos del proyecto</h5>
-      <div class="mt-2">
-        <%= render 'projects/project_form/project_data_form', project: @project, form: form %>
-      </div>
-    </div>
-    <hr>
-    <div data-controller="select" data-select-hidden-class="hidden" class="row" data-action="<%= action_name %>">
-      <h5>Agregar investigadores al proyecto</h5>
-      <%= render 'projects/project_form/add_individual_form', project: @project, individuals: @individuals, form: form %>
-    </div>
-    <div class="row text-center mt-5">
-      <div class="col">
-        <%= button_tag( :class => "btn btn-primary") do %>
-          <i class="bi bi-check-lg"></i>
-          Guardar
+<%# TODO: NEITHER CREATING OR UPDATING A PROJECT IS WORKING, CHECK CONTROLLER OR CHECKBOX %>
+
+<%= form_with(model: project) do |form| %>
+  <%# TODO: Create an error.html.erb file to be reused in all the other views %>
+  <% if project.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+      <ul>
+        <% project.errors.each do |error| %>
+          <li><%= error.full_message %></li>
         <% end %>
-      </div>
+      </ul>
     </div>
   <% end %>
-</div>
+
+  <h3 class="main__body-subtitle my-rg"><i class="bi bi-folder-fill"></i></i> DATOS DEL PROYECTO</h3>
+
+  <div class="grid-1 grid-2--tablet">
+    <div class="form__field">
+      <%= form.label "Código previo", class: "form__label" %>
+      <%= form.text_field :preAcceptanceCode, class: "form-control form__input", placeholder: "Código previo" %>
+    </div>
+
+    <div class="form__field">
+      <%= form.label "Código final", class: "form__label" %>
+      <%= form.text_field :finalCode, class: "form-control form__input", placeholder: "Código final" %>
+    </div>
+  </div>
+
+  <div class="form__field">
+    <%= form.label "Nombre del proyecto", class: "form__label" %>
+    <%= form.text_field :name, class: "form-control form__input", placeholder: "Nombre del proyecto" %>
+  </div>
+
+  <h3 class="main__body-subtitle my-rg"><i class="bi bi-people-fill"></i></i> ASOCIADOS(AS) DEL PROYECTO</h3>
+
+  <div class="form__field">
+    <%= form.label "Investigador principal", class: "form__label" %>
+    <%# TODO: Review the value in every option to see if its working correctly %>
+    <%= form.select :principal_investigator, options_for_select(@individuals.all, @project.principal_investigator), { include_blank: "- Seleccione una opción -" }, class: "form-select form__input" %>
+  </div>
+
+  <div class="form__field">
+    <%= form.label "Asociados(as)", class: "form__label" %>
+    <%# TODO: Fix the combo boxes when editing. Currently not showing the selected individuals %>
+    <%= render 'projects/project_form/individuals_form_table', individuals: @individuals, project: @project, f: form %>
+  </div>
+
+  <div class="form__actions">
+    <%= form.submit "Guardar", class: "btn__primary" %>
+    <%= link_to "Regresar", projects_path, class:"btn__grey" %>
+  </div>
+<% end %>

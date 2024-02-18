@@ -121,5 +121,11 @@ label {
 
     @include m.tablet {
         padding: 0 !important;
+
+        &--upsert {
+            max-width: 65rem;
+            margin: 0 auto;
+            margin-top: 3rem;
+        }
     }
 }

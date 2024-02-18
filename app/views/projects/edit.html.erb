@@ -1,8 +1,9 @@
-<div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
-  <div class="row mb-3 text-center">
-    <h1>Información del proyecto</h1>
+<main class="main container container--upsert">
+  <div class="main__body">
+    <h1 class="main__title main__title--upsert">INFORMACIÓN DEL PROYECTO</h1>
+
+    <div class="main__form">
+      <%= render "projects/project_form/form", project: @project, individuals: @individuals%>
+    </div>
   </div>
-  <div class="row">
-    <%= render "projects/project_form/form", project: @project%>
-  </div>
-</div>
+</main>

@@ -9,6 +9,8 @@ class Project < ApplicationRecord
   has_many :minutes, through: :articles
 
   accepts_nested_attributes_for :project_investigators, reject_if: ->(attributes) { attributes["name"].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :individuals, allow_destroy: true
+  
   def investigators_roles
     self.project_investigators.map { |pi| [pi.full_name, pi.role] }
   end
