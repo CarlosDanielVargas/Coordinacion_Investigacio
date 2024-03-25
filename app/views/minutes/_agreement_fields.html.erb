@@ -1,34 +1,29 @@
-<div class="nested-fields agreement-fields">
-  <div class="row mt-4 ms-1">
-    <div class="col-2">
-      <%= f.label :code, "Número de acuerdo", style: "display: block" %>
-    </div>
-    <div class="col-2">
-      <%= f.text_field :code, class: "form-control" %>
-    </div>
-    <div class="col-1">
-      <%= f.label :description, "Descripción", style: "display: block" %>
-    </div>
-    <div class="col-2">
-      <%= f.text_field :description, class: "form-control" %>
-    </div>
-    <div class="col-3 btn-group">
-      <%= link_to_remove_association f, class: "btn btn-danger" do %>
-        <i class="bi bi-trash-fill"></i>
-      <% end %>
-      <%= link_to_add_association f, :transaction_records, class: "btn btn-success add-transaction", data: { association_insertion_node: ".transactions", association_insertion_method: :append } do %>
-        <i class="bi bi-plus-circle-fill"></i> Agregar trámite
-      <% end %>
-    </div>
-    <div class="row pb-2">
-      <div id="transactions_<%= f.object.object_id %>" class="transactions">
-        <%= f.fields_for :transaction_records do |transaction| %>
-          <%= render "transaction_record_fields", f: transaction, minute: minute %>
-        <% end %>
-      </div>
-    </div>
+<div class="nested-fields agreement-fields minutes__form-fields--agreements">
+  <div class="form__field">
+    <%= f.text_field :code, class: "form-control form__input mt-2", placeholder: "N° de acuerdo" %>
+  </div>
+
+  <div class="form__field">
+    <%= f.text_field :description, class: "form-control form__input mt-2", placeholder: "Descripción" %>
+  </div>
+
+  <div class="form__actions">
+    <%= link_to_remove_association f, class: "btn__danger px-3 py-2" do %>
+      <i class="bi bi-trash-fill"></i>
+    <% end %>
+    <%= link_to_add_association f, :transaction_records, class: "btn__primary px-3 py-2 add-transaction", data: { association_insertion_node: ".transactions", association_insertion_method: :append } do %>
+      <i class="bi bi-plus-square"></i> Trámite
+    <% end %>
   </div>
 </div>
+
+<%# TRANSACTIONS %>
+<div id="transactions_<%= f.object.object_id %>" class="transactions">
+  <%= f.fields_for :transaction_records do |transaction| %>
+    <%= render "transaction_record_fields", f: transaction, minute: minute %>
+  <% end %>
+</div>
+
 <script>
     $(document).on('cocoon:before-insert', function (e, insertedItem, originalEvent) {
         var htmlString = originalEvent.target.outerHTML

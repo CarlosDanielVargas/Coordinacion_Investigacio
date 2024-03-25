@@ -57,6 +57,11 @@
         &-subtitle {
             color: v.$grey;
             font-size: 16px;
+
+            &--minutes {
+                color: v.$primary;
+                font-size: 22px;
+            }
         }
     }
     

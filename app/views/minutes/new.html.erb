@@ -1,12 +1,9 @@
-<div class="container mt-3 pt-5 pb-5 ps-5 pe-5 border border-2 rounded-3">
-  <div class="row mb-3 text-center">
-    <h1 class=>Nueva acta</h1>
+<main class="main container container--upsert">
+  <div class="main__body">
+    <h1 class="main__title main__title--upsert">NUEVA ACTA</h1>
+
+    <div class="main__form">
+      <%= render "form", minute: @minute %>
+    </div>
   </div>
-  <div class="row">
-    <%= render "form", minute: @minute %>
-  </div>
-</div>
-<br>
-<div>
-  <%= link_to "Back to minutes", minutes_path %>
-</div>
+</main>

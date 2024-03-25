@@ -1,61 +1,91 @@
-<div class="container minute">
-  <%= form_with(model: minute) do |f| %>
-    <% if minute.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(minute.errors.count, "error") %> prohibited this minute from being saved:</h2>
-        <ul>
-          <% minute.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <div class="row pb-2">
-      <%= f.label "Número", style: "display: block" %>
-      <%= f.number_field :number, class: "form-control" %>
+<%= form_with(model: minute) do |f| %>
+  <% if minute.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(minute.errors.count, "error") %> prohibited this minute from being saved:</h2>
+      <ul>
+        <% minute.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
     </div>
-    <div class="row pb-2">
-      <%= f.label "Fecha de la reunión:", style: "display: block" %>
-      <%= f.date_field :creation_date, class: "form-control" %>
+  <% end %>
+  
+  <h3 class="main__body-subtitle my-rg"><i class="bi bi-file-earmark-medical-fill"></i> DATOS DEL ACTA</h3>
+
+  <div class="grid-1 grid-2--tablet grid-3--desktop">
+    <div class="form__field">
+      <%= f.label 'Número de acta', class: "form__label" %>
+      <%= f.number_field :number, class: "form-control form__input", placeholder: "Número de acta", min: 0 %>
     </div>
-    <div class="row pb-2">
-      <%= f.label "Fecha de la aceptación:", style: "display: block" %>
-      <%= f.date_field :acceptation_date, class: "form-control" %>
+
+    <div class="form__field">
+      <%= f.label 'Fecha de reunión', class: "form__label" %>
+      <%= f.date_field :creation_date, class: "form-control form__input" %>
     </div>
-    <div class="row pb-2">
-      <%= f.label "Documento de acta", style: "display: block" %>
-      <%= f.file_field :file, class: "form-control", direct_upload: true %>
+
+    <div class="form__field">
+      <%= f.label 'Fecha de aprobación', class: "form__label" %>
+      <%= f.date_field :acceptation_date, class: "form-control form__input" %>
+    </div>
+
+    <%# TODO: CHANGE IT FOR THE ACTUALL ONE %>
+    <div class="form__field mobile-display">
+      <%= f.label 'Enlace de grabación', class: "form__label" %>
+      <input type="text" class="form-control form__input" placeholder="Enlace de grabación">
+      <%# f.text_field :meeting_url, class: "form-control form__input", placeholder: "Enlace de grabación", min: 0 %>
+    </div>
+  </div>
+
+  <div class="grid-1 grid-2--desktop">
+    <div class="form__field desktop-display">
+      <%= f.label 'Enlace de grabación', class: "form__label" %>
+      <input type="text" class="form-control form__input" placeholder="Enlace de grabación">
+      <%# f.text_field :meeting_url, class: "form-control form__input", placeholder: "Enlace de grabación", min: 0 %>
+    </div>
+
+    <div class="form__field">
+      <%= f.label "Documento de acta", class: "form__label" %>
+
+      <%= f.file_field :file, class: "form-control form__input", direct_upload: true %>
+
       <% if minute.file.attached? %>
         <p>Documento existente: <%= link_to minute.file.filename, url_for(minute.file), target: "_blank" %></p>
       <% end %>
     </div>
+
+  </div>
+
+  <h3 class="main__body-subtitle my-rg h-divider"><i class="bi bi-folder-fill"></i> ELEMENTOS ASOCIADOS</h3>
+
+  <div class="d-flex align-items-center justify-content-between">
+    <h2 class="main__body-subtitle--minutes">Artículos</h2>
+
     <div>
-      <div class="row pb-2">
-        <h4>Artículos</h4>
-        <div>
-          <%= link_to_add_association f, :articles, class: "btn btn-success add-article", data: { association_insertion_node: '.articles', association_insertion_method: :append} do %>
-            <i class="bi bi-plus-circle-fill"></i> Agregar artículo
-          <% end %>
-        </div>
-      </div>
-      <div class="row pb-2">
-        <div class="articles">
-          <%= f.fields_for :articles do |article| %>
-            <%= render "article_fields", f: article, minute: minute %>
-          <% end %>
-        </div>
-      </div>
+      <%= link_to_add_association f, :articles, class: "btn__primary px-3 py-2 add-article", data: { association_insertion_node: '.articles', association_insertion_method: :append} do %>
+        <i class="bi bi-plus-square"></i> Artículo
+      <% end %>
     </div>
-    <div class="row pt-4">
-      <div class="col text-center">
-        <%= button_tag(:class => "btn btn-primary") do %>
-          <i class="bi bi-check-lg"></i>
-          Guardar
-        <% end %>
-      </div>
+  </div>
+
+  <div class="minutes__form">
+    <div class="minutes__form-header">
+      <p>N° Artículo</p>
+      <p>Proyecto/Solicitud asociada</p>
+      <p>Acciones</p>
     </div>
-  <% end %>
-</div>
+
+    <div class="articles">
+      <%= f.fields_for :articles do |article| %>
+        <%= render "article_fields", f: article, minute: minute %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form__actions">
+    <%= f.submit "Guardar", class: "btn__primary" %>
+    <%= link_to "Regresar", projects_path, class:"btn__grey" %>
+  </div>
+<% end %>
 
 <script>
     $(document).on('cocoon:before-insert', function(e, insertedItem, originalEvent) {

@@ -1,37 +1,33 @@
-<div class="nested-fields article-fields">
-  <div class="row mt-4">
-    <div class="col-2">
-      <%= f.label :code, "Número de artículo", style: "display: block" %>
-    </div>
-    <div class="col-2">
-      <%= f.text_field :code, class: "form-control" %>
-    </div>
-    <div class="col-2">
-      <%= f.label :project_id, "Proyecto/Solicitud", style: "display: block" %>
-    </div>
-    <div class="col-1">
-      <%= f.select :project_id, options_for_select(@projects.all.map { |project| [project.finalCode + " - " + project.name, project.id] }), {}, class: "form-select" %>
-    </div>
-    <div class="col-1">
-      <%= f.select :request_id, options_for_select(@requests.all.map { |request| [request.individual.first_name + " " + request.individual.last_name + " - " + request.title, request.id] }), {}, class: "form-select" %>
-    </div>
-    <div class="col-2 btn-group">
-      <%= link_to_remove_association f, class: "btn btn-danger" do %>
-        <i class="bi bi-trash-fill"></i>
-      <% end %>
-      <%= link_to_add_association f, :agreements, class: "btn btn-success add-agreement", data: { association_insertion_node: ".agreements", association_insertion_method: :append } do %>
-        <i class="bi bi-plus-circle-fill"></i> Agregar acuerdo
-      <% end %>
-    </div>
-    <div class="row pb-2">
-      <div id="agreements_<%= f.object.object_id %>" class="agreements">
-        <%= f.fields_for :agreements do |agreement| %>
-          <%= render "agreement_fields", f: agreement, minute: minute %>
-        <% end %>
-      </div>
-    </div>
+<div class="nested-fields article-fields minutes__form-fields">
+  <div class="form__field pt-2">
+    <%= f.text_field :code, class: "form-control form__input form__input--minutes", placeholder: "N° Articulo" %>
+  </div>
+
+  <div class="form__field pt-2">
+    <%= f.select :project_id, options_for_select(@projects.all.map { |project| [project.finalCode + " - " + project.name, project.id] }), { prompt: "- Seleccione una opción -" }, class: "form-select form__input form__input--minutes" %>
+
+    <%# TODO: ADD REQUEST SELECT FUNCTIONALITY %>
+    <%# f.select :request_id, options_for_select(@requests.all.map { |request| [request.individual.first_name + " " + request.individual.last_name + " - " + request.title, request.id] }), {}, class: "form-select form__input" %>
+  </div>
+
+  <div class="form__actions">
+    <%= link_to_remove_association f, class: "btn__danger px-3 py-2" do %>
+      <i class="bi bi-trash-fill"></i>
+    <% end %>
+
+    <%= link_to_add_association f, :agreements, class: "btn btn__primary px-3 py-2 add-agreement", data: { association_insertion_node: ".agreements", association_insertion_method: :append } do %>
+      <i class="bi bi-plus-square"></i> Acuerdo
+    <% end %>
   </div>
 </div>
+
+<%# Agreements %>
+<div id="agreements_<%= f.object.object_id %>" class="agreements">
+  <%= f.fields_for :agreements do |agreement| %>
+    <%= render "agreement_fields", f: agreement, minute: minute %>
+  <% end %>
+</div>
+
 <script>
     $(document).on('cocoon:before-insert', function (e, insertedItem, originalEvent) {
         var htmlString = originalEvent.target.outerHTML

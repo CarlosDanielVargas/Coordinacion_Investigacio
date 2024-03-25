@@ -12,3 +12,7 @@
 .btn__grey {
     @include m.button(v.$grey, v.$light);
 }
+
+.btn__danger {
+    @include m.button(v.$danger, v.$light);
+}

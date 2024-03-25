@@ -1,34 +1,29 @@
-<div class="nested-fields transaction-fields">
-  <div class="row mt-4 ms-2">
-    <div class="col-2">
-      <%= f.label :status, "Estado del trámite", style: "display: block" %>
-    </div>
-    <div class="col-2">
-      <%= f.select :status, TransactionRecord.statuses.keys.map { |key| [key.capitalize, key] }, class: "form-control" %>
-    </div>
-    <div class="col-1">
-      <%= f.label :description, "Descripción", style: "display: block" %>
-    </div>
-    <div class="col-2">
-      <%= f.text_field :description, class: "form-control" %>
-    </div>
-    <div class="col-3 btn-group">
-      <%= link_to_remove_association f, class: "btn btn-danger" do %>
-        <i class="bi bi-trash-fill"></i>
-      <% end %>
-      <%= link_to_add_association f, :notices, class: "btn btn-success add-notice", data: { association_insertion_node: ".notices", association_insertion_method: :append } do %>
-        <i class="bi bi-plus-circle-fill"></i> Agregar oficio
-      <% end %>
-    </div>
+<div class="nested-fields transaction-fields minutes__form-fields--transactions">
+  <div class="form__field">
+    <%= f.select :status, TransactionRecord.statuses.keys.map { |key| [key.capitalize, key] }, {}, { class: 'form-select form__input mt-2' } %>
   </div>
-  <div class="row pb-2">
-    <div id="notices_<%= f.object.object_id %>" class="notice">
-      <%= f.fields_for :notices do |notice| %>
-        <%= render "notice_fields", f: notice, minute: minute, transaction_record: f %>
-      <% end %>
-    </div>
+
+  <div class="form__field">
+    <%= f.text_field :description, class: "form-control form__input mt-2", placeholder: "Descripción" %>
+  </div>
+
+  <div class="form__actions">
+    <%= link_to_remove_association f, class: "btn__danger px-3 py-2" do %>
+      <i class="bi bi-trash-fill"></i>
+    <% end %>
+    <%= link_to_add_association f, :notices, class: "btn__primary px-3 py-2 add-notice", data: { association_insertion_node: ".notices", association_insertion_method: :append } do %>
+      <i class="bi bi-plus-square"></i> Oficio
+    <% end %>
   </div>
 </div>
+
+<%# NOTICES %>
+<div id="notices_<%= f.object.object_id %>" class="notice">
+  <%= f.fields_for :notices do |notice| %>
+    <%= render "notice_fields", f: notice, minute: minute, transaction_record: f %>
+  <% end %>
+</div>
+
 <script>
     $(document).on('cocoon:before-insert', function (e, insertedItem, originalEvent) {
         var htmlString = originalEvent.target.outerHTML

@@ -9,6 +9,14 @@
     gap: 4rem;
 }
 
+.mobile-display {
+    display: inline-block !important;
+
+    @include m.desktop {
+        display: none !important;
+    }
+}
+
 .tablet-display {
     display: none !important;
 
@@ -70,6 +78,16 @@
         color: v.$grey;
         cursor: pointer;
     }
+}
+
+.h-divider {
+    width: 100%;
+    padding-top: 1.5rem;
+    border-top: 1px solid v.$light-gray;
+}
+
+.transactions, .notice {
+    display: none;
 }
 
 .secondary-color {

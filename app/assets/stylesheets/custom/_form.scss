@@ -6,6 +6,12 @@
         margin-bottom: .5rem;
     }
 
+    &__input {
+        &--minutes {
+            background-color: #E7EDF7;
+        }
+    }
+
     &__label {
         margin-bottom: .2rem;
     }

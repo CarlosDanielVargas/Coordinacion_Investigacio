@@ -1,26 +1,19 @@
-<div class="nested-fields notice-fields">
-  <div class="row mt-4 ms-4">
-    <div class="col-2">
-      <%= f.label :code, "Número de oficio", style: "display: block" %>
-    </div>
-    <div class="col-2">
-      <%= f.text_field :code, class: "form-control" %>
-    </div>
-    <div class="col-2">
-      <%= f.label "Documento del oficio", style: "display: block" %>
-    </div>
-    <div class="col-3">
-      <%= f.file_field :file, class: "form-control", direct_upload: true %>
-    </div>
-    <div class="col-2">
-      <% if f.object.file.attached? %>
-        <p>Documento existente: <%= link_to f.object.file.filename, url_for(f.object.file), target: "_blank" %></p>
-      <% end %>
-    </div>
-    <div class="col-1">
-      <%= link_to_remove_association f, class: "btn btn-danger" do %>
-        <i class="bi bi-trash-fill"></i>
-      <% end %>
-    </div>
+<div class="nested-fields notice-fields minutes__form-fields--notices">
+  <div class="form__field">
+    <%= f.text_field :code, class: "form-control form__input mt-2", placeholder: "N° Oficio" %>
+  </div>
+
+  <div class="form__field">
+    <%= f.file_field :file, class: "form-control form__input mt-2", direct_upload: true %>
+
+    <% if f.object.file.attached? %>
+      <p>Documento existente: <%= link_to f.object.file.filename, url_for(f.object.file), target: "_blank" %></p>
+    <% end %>
+  </div>
+
+  <div class="form__actions">
+    <%= link_to_remove_association f, class: "btn__danger px-3 py-2" do %>
+      <i class="bi bi-trash-fill"></i>
+    <% end %>
   </div>
 </div>
