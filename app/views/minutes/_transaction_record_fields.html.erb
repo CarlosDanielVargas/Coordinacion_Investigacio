@@ -31,19 +31,44 @@
         var doc = parser.parseFromString(htmlString, 'text/html');
         var element = doc.querySelector('a');
         var classes = Array.from(element.classList);
+
         if (classes.includes("add-notice")) {
             e.preventDefault()
             var buttonClicked = originalEvent.target
             var parentTransaction = $(buttonClicked).closest('.transaction-fields')
             var notices = parentTransaction.find('.notice-fields')
             var totalNotices = notices.length
+
             if (totalNotices === 0) {
+                const sectionHeader = document.createElement('div');
+                sectionHeader.classList.add('main__body-header--notices');
+
+                // Section title
+                const subtitle = document.createElement('h2');
+                subtitle.textContent = "Oficios";
+                subtitle.classList.add('main__body-subtitle--minutes')
+                sectionHeader.append(subtitle);
+
+                // Section headers
+                const headers = document.createElement('div');
+                headers.classList.add('main__body-headers--notices');
+
+                ['N° de oficio', 'Descripción', 'Acciones'].forEach(element => {
+                    const paragraph = document.createElement('p');
+                    paragraph.textContent = element;
+                    headers.append(paragraph);
+                });
+                sectionHeader.append(headers);
+
+                parentTransaction.append(sectionHeader);
                 insertedItem.attr("id", parentTransaction.attr('id') + "notice_1")
             } else {
                 var lastNotice = notices[totalNotices - 1]
                 var lastNoticeId = lastNotice.id
                 var lastNoticeNumber = lastNoticeId.split("_")[4]
                 var newNoticeNumber = parseInt(lastNoticeNumber) + 1
+                lastNotice.classList.remove('last__element');
+
                 insertedItem.attr("id", parentTransaction.attr('id') + "notice_" + newNoticeNumber)
             }
 
@@ -53,6 +78,11 @@
                 .data("association-insertion-node", '#' + parentTransaction.attr('id'));
 
             parentTransaction.append(insertedItem)
+
+            // Adding styles to last recent agreement
+            notices = parentTransaction.find('.notice-fields')
+            lastNotice = notices[notices.length - 1]
+            lastNotice.classList.add('last__element');
         }
     });
 </script>

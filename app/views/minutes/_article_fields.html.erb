@@ -35,19 +35,44 @@
         var doc = parser.parseFromString(htmlString, 'text/html');
         var element = doc.querySelector('a');
         var classes = Array.from(element.classList);
+
         if (classes.includes("add-agreement")) {
             e.preventDefault()
             var buttonClicked = originalEvent.target
             var parentArticle = $(buttonClicked).closest('.article-fields')
             var agreements = parentArticle.find('.agreement-fields')
             var totalAgreements = agreements.length
+
             if (totalAgreements === 0) {
+                const sectionHeader = document.createElement('div');
+                sectionHeader.classList.add('main__body-header--agreements');
+
+                // Section title
+                const subtitle = document.createElement('h2');
+                subtitle.textContent = "Acuerdos";
+                subtitle.classList.add('main__body-subtitle--minutes')
+                sectionHeader.append(subtitle);
+
+                // Section headers
+                const headers = document.createElement('div');
+                headers.classList.add('main__body-headers--agreements');
+
+                ['N° de acuerdo', 'Descripción', 'Acciones'].forEach(element => {
+                    const paragraph = document.createElement('p');
+                    paragraph.textContent = element;
+                    headers.append(paragraph);
+                });
+                sectionHeader.append(headers);
+
+                parentArticle.append(sectionHeader);
                 insertedItem.attr("id", parentArticle.attr('id') + "agreement_1")
             } else {
                 var lastAgreement = agreements[totalAgreements - 1]
                 var lastAgreementId = lastAgreement.id
                 var lastAgreementNumber = lastAgreementId.split("_")[2]
-                var newAgreementNumber = parseInt(lastAgreementNumber) + 1
+                var newAgreementNumber = parseInt(lastAgreementNumber) + 1;
+                lastAgreement.classList.remove('last__element');
+
                 insertedItem.attr("id", parentArticle.attr('id') + "agreement_" + newAgreementNumber)
             }
 
@@ -55,8 +80,13 @@
             insertedItem.find("a.add_fields")
               .data("association-insertion-method", 'append')
               .data("association-insertion-node", '#' + parentArticle.attr('id'));
-
+            
             parentArticle.append(insertedItem)
+
+            // Adding styles to last recent agreement
+            agreements = parentArticle.find('.agreement-fields')
+            lastAgreement = agreements[agreements.length - 1]
+            lastAgreement.classList.add('last__element');
         }
     });
 </script>

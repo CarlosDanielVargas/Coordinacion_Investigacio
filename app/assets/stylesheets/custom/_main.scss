@@ -63,6 +63,53 @@
                 font-size: 22px;
             }
         }
+
+        &-header--agreements,
+        &-header--transactions,
+        &-header--notices {
+            grid-column: 1 / 4;
+            padding-left: .5rem;
+            border-top-left-radius: v.$border-radius-rg;
+            border-top-right-radius: v.$border-radius-rg;
+        }
+
+        &-header--agreements,
+        &-header--notices {
+            background-color: #F0F0F0;
+            border: 1px solid #D7D7D7;
+            border-bottom: none;
+        }
+
+        &-header--transactions {
+            background-color: #F8F8F8;
+            border: 1px solid #D7D7D7;
+            border-bottom: none;
+        }
+
+        &-headers--agreements,
+        &-headers--transactions,
+        &-headers--notices {
+            display: grid;
+            
+            & p {
+                font-size: 14px;
+                color: v.$grey;
+                font-weight: bold;
+            }
+        }
+
+        &-headers--agreements {
+            grid-template-columns: 1fr 2.5fr 1fr;
+        }
+
+        &-headers--transactions,
+        &-headers--notices {
+            grid-template-columns: 1fr 2.7fr 1fr;
+        }
+
+        &-headers--notices {
+            gap: 1rem;
+        }
     }
     
     &__filters {

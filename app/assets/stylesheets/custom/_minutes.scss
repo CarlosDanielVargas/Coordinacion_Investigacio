@@ -24,6 +24,7 @@
         background-color: #F0F0F0;
         font-size: 14px;
         color: v.$grey;
+        font-weight: bold;
         border-top-left-radius: v.$border-radius-rg;
         border-top-right-radius: v.$border-radius-rg;
         border-bottom: 1px solid v.$light-gray;
@@ -35,12 +36,6 @@
     }
 
     &-fields {
-        :nth-child(4) {
-            margin-top: .2rem;
-            border-top-left-radius: v.$border-radius-rg;
-            border-top-right-radius: v.$border-radius-rg;
-        }
-
         &--agreements {
             background-color: #F0F0F0;
             grid-column: 1 / 4;
@@ -48,10 +43,8 @@
             grid-template-columns: 1fr 2.5fr 1fr;
             margin-top: -1rem;
 
-            &:last-of-type {
-                border-bottom-left-radius: v.$border-radius-rg;
-                border-bottom-right-radius: v.$border-radius-rg;
-            }
+            border-left: 1px solid #d7d7d7;
+            border-right: 1px solid #d7d7d7;
         }
 
         &--transactions,
@@ -61,6 +54,9 @@
             display: grid;
             gap: 1rem;
             grid-template-columns: 1fr 2.7fr 1fr;
+
+            border-left: 1px solid #d7d7d7;
+            border-right: 1px solid #d7d7d7;
         }
 
         &--transactions {

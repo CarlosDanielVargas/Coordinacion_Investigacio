@@ -94,17 +94,21 @@
         var doc = parser.parseFromString(htmlString, 'text/html');
         var element = doc.querySelector('a');
         var classes = Array.from(element.classList);
+        
         if (classes.includes("add-article")) {
             var articleDiv = e.target
             var articles = articleDiv.getElementsByClassName("article-fields")
             var totalArticles = articles.length
+
             if (totalArticles === 0) {
                 insertedItem.attr("id", "article_1")
+
             } else {
                 var lastArticle = articles[totalArticles - 1]
                 var lastArticleId = lastArticle.id
                 var lastArticleNumber = parseInt(lastArticleId.split("_")[1])
                 var newArticleNumber = lastArticleNumber + 1
+
                 insertedItem.attr("id", "article_" + newArticleNumber)
             }
         }

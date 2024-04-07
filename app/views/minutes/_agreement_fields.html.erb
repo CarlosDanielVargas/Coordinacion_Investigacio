@@ -37,13 +37,37 @@
             var parentAgreement = $(buttonClicked).closest('.agreement-fields')
             var transactions = parentAgreement.find('.transaction-fields')
             var totalTransactions = transactions.length
+
             if (totalTransactions === 0) {
+                const sectionHeader = document.createElement('div');
+                sectionHeader.classList.add('main__body-header--transactions');
+
+                // Section title
+                const subtitle = document.createElement('h2');
+                subtitle.textContent = "Trámites";
+                subtitle.classList.add('main__body-subtitle--minutes')
+                sectionHeader.append(subtitle);
+
+                // Section headers
+                const headers = document.createElement('div');
+                headers.classList.add('main__body-headers--transactions');
+
+                ['Estado', 'Descripción', 'Acciones'].forEach(element => {
+                    const paragraph = document.createElement('p');
+                    paragraph.textContent = element;
+                    headers.append(paragraph);
+                });
+                sectionHeader.append(headers);
+
+                parentAgreement.append(sectionHeader);
                 insertedItem.attr("id", parentAgreement.attr('id') + "transaction_1")
             } else {
                 var lastAgreement = transactions[totalTransactions - 1]
                 var lastAgreementId = lastAgreement.id
                 var lastAgreementNumber = lastAgreementId.split("_")[3]
                 var newAgreementNumber = parseInt(lastAgreementNumber) + 1
+                lastAgreement.classList.remove('last__element');
+
                 insertedItem.attr("id", parentAgreement.attr('id') + "transaction_" + newAgreementNumber)
             }
 
@@ -53,6 +77,11 @@
                 .data("association-insertion-node", '#' + parentAgreement.attr('id'));
 
             parentAgreement.append(insertedItem)
+
+            // Adding styles to last recent agreement
+            transactions = parentAgreement.find('.transaction-fields')
+            lastTransaction = transactions[transactions.length - 1]
+            lastTransaction.classList.add('last__element');
         }
     });
 </script>

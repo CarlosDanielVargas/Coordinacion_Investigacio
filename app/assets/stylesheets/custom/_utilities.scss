@@ -232,3 +232,9 @@ div[class$="__filters-body"] {
 .fs-xxl {
     font-size: v.$fs-xxl;
 }
+
+.last__element {
+    border-bottom: 1px solid #D7D7D7;
+    border-bottom-left-radius: v.$border-radius-rg;
+    border-bottom-right-radius: v.$border-radius-rg;
+}

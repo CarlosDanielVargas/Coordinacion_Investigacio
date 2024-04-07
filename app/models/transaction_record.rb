@@ -5,7 +5,7 @@ class TransactionRecord < ApplicationRecord
     accepts_nested_attributes_for :notices, allow_destroy: true, reject_if: proc { |attr| attr["code"].blank? }
 
     # Enum
-    enum status: [:Pendiente, :Finalizado, :En_Ejecución]
+    enum status: [:Pendiente, :Finalizado, :'En proceso']
 
     # Validations
     validates :status, presence: true
